@@ -1,7 +1,12 @@
 import type { NextPage } from 'next'
+import { HeroSection } from '../modules/home/components/HeroSection/HeroSection'
 
 const Home: NextPage = () => {
-  return <div> hello word</div>
+  return (
+    <>
+      <HeroSection />
+    </>
+  )
 }
 
 export default Home

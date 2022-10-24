@@ -18,9 +18,10 @@ declare module 'styled-components' {
       lexend: string
     }
     breakpoints: {
-      tablet: string
-      laptop: string
-      desktop: string
+      sm: string
+      md: string
+      lg: string
+      xg: string
     }
   }
 }

@@ -15,8 +15,9 @@ export const theme: DefaultTheme = {
     lexend: 'Lexend'
   },
   breakpoints: {
-    tablet: '768px',
-    laptop: '1024px',
-    desktop: '1440px'
+    sm: '375px',
+    md: '768px',
+    lg: '1024px',
+    xg: '1440px'
   }
 }
