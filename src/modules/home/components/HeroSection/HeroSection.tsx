@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import pt from 'react-phone-input-2/lang/pt.json'
 import { Button } from '../../../../shared/styles/components/Button/Button'
+import { Phone } from '../../../../shared/styles/components/PhoneInput/PhoneInputStyles'
 import * as S from './HeroSectionStyles'
 
 export function HeroSection() {
@@ -101,7 +102,7 @@ export function HeroSection() {
               Preencha com o seu <br /> WhatsApp e concorra
             </h3>
 
-            <S.Phone
+            <Phone
               dropdownClass="input-phone-dropdown"
               buttonClass="input-phone-button"
               inputClass="phone-input"
