@@ -2,8 +2,8 @@ import FutureImage from 'next/future/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import pt from 'react-phone-input-2/lang/pt.json'
-import { Button } from '../../../../shared/styles/components/Button/Button'
-import { Phone } from '../../../../shared/styles/components/PhoneInput/PhoneInputStyles'
+import { Button } from '@/shared/components/Button/Button'
+import { PhoneInput } from '@/shared/components/PhoneInput/PhoneInput'
 import * as S from './HeroSectionStyles'
 
 export function HeroSection() {
@@ -102,7 +102,7 @@ export function HeroSection() {
               Preencha com o seu <br /> WhatsApp e concorra
             </h3>
 
-            <Phone
+            <PhoneInput
               dropdownClass="input-phone-dropdown"
               buttonClass="input-phone-button"
               inputClass="phone-input"
