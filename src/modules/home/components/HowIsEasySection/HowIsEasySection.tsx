@@ -1,6 +1,7 @@
 import * as S from './HowIsEasySectionStyles'
 import FutureImage from 'next/future/image'
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
+import { AtractionCard } from '@/modules/home/components/HowIsEasySection/AtractionCard/AtractionCard'
 export function HowIsEasySection() {
   return (
     <S.Container>
@@ -81,90 +82,22 @@ export function HowIsEasySection() {
           </h3>
 
           <S.AtractionsList>
-            <S.AtractionCard>
-              <FutureImage
-                className="atraction-img"
-                src={'/images/atraction-1.jpg'}
-                alt="Atração Da Disney"
-                width={268}
-                height={255}
-              />
-              <div className="overlay">
-                <span className="atraction-name">Magic Kingdom</span>
-                <button>
-                  <span>Quero conhecer</span>
-                  <FutureImage
-                    src={'/icons/arrow-right-blue.svg'}
-                    alt="Trevo"
-                    width={32}
-                    height={32}
-                  />
-                </button>
-              </div>
-            </S.AtractionCard>
-            <S.AtractionCard>
-              <FutureImage
-                className="atraction-img"
-                src={'/images/atraction-1.jpg'}
-                alt="Atração Da Disney"
-                width={268}
-                height={255}
-              />
-              <div className="overlay">
-                <span className="atraction-name">Magic Kingdom</span>
-                <button>
-                  <span>Quero conhecer</span>
-                  <FutureImage
-                    src={'/icons/arrow-right-blue.svg'}
-                    alt="Trevo"
-                    width={32}
-                    height={32}
-                  />
-                </button>
-              </div>
-            </S.AtractionCard>
-            <S.AtractionCard>
-              <FutureImage
-                className="atraction-img"
-                src={'/images/atraction-1.jpg'}
-                alt="Atração Da Disney"
-                width={268}
-                height={255}
-              />
-              <div className="overlay">
-                <span className="atraction-name">Magic Kingdom</span>
-                <button>
-                  <span>Quero conhecer</span>
-                  <FutureImage
-                    src={'/icons/arrow-right-blue.svg'}
-                    alt="Trevo"
-                    width={32}
-                    height={32}
-                  />
-                </button>
-              </div>
-            </S.AtractionCard>
-            <S.AtractionCard>
-              <FutureImage
-                className="atraction-img"
-                src={'/images/atraction-1.jpg'}
-                alt="Atração Da Disney"
-                width={268}
-                height={255}
-              />
-              <div className="overlay">
-                <span className="atraction-name">Magic Kingdom</span>
-                <button>
-                  <span>Quero conhecer</span>
-                  <FutureImage
-                    src={'/icons/arrow-right-blue.svg'}
-                    alt="Trevo"
-                    width={32}
-                    height={32}
-                  />
-                </button>
-              </div>
-            </S.AtractionCard>
+            <AtractionCard
+              name="Magic Kingdom"
+              imgSrc="/images/atraction-1.jpg"
+            />
+            <AtractionCard
+              name="Hollywood Studios"
+              imgSrc="/images/atraction-2.jpg"
+            />
+            <AtractionCard
+              name="Animal Kingdom"
+              imgSrc="/images/atraction-3.jpg"
+            />
+            <AtractionCard
+              name="Typhoon Lagoon"
+              imgSrc="/images/atraction-4.jpg"
+            />
           </S.AtractionsList>
         </S.Atractions>
       </S.Content>
