@@ -1,27 +1,11 @@
-import {
-  Container,
-  Content,
-  RegisterSteps,
-  SeeHowIsEasyColumn,
-  CTAButton,
-  BePartYouTooBox,
-  ImageGalery,
-  BoxOne,
-  BoxTwo,
-  Atractions,
-  AtractionsList,
-  AtractionCard,
-  StepsBox,
-  StepsContent
-} from './HowIsEasySectionStyles'
-
+import * as S from './HowIsEasySectionStyles'
 import FutureImage from 'next/future/image'
 export function HowIsEasySection() {
   return (
-    <Container>
-      <Content>
-        <RegisterSteps>
-          <SeeHowIsEasyColumn>
+    <S.Container>
+      <S.Content>
+        <S.RegisterSteps>
+          <S.SeeHowIsEasyColumn>
             <h3>Veja como é fácil!</h3>
             <p>
               Realize o seu sonho da viagem para Disney nas próximas férias.
@@ -29,7 +13,7 @@ export function HowIsEasySection() {
               <strong>Faça o cadastro, é grátis!</strong>
             </p>
 
-            <StepsBox>
+            <S.StepsBox>
               <FutureImage
                 className="steps"
                 src={'/images/steps.svg'}
@@ -37,13 +21,13 @@ export function HowIsEasySection() {
                 width={24}
                 height={160}
               />
-              <StepsContent>
+              <S.StepsContent>
                 <span>Realize o seu cadastro</span>
                 <span>Ganhe números da sorte</span>
                 <span>Concorra a uma viagem para a Disney</span>
-              </StepsContent>
-            </StepsBox>
-            <CTAButton>
+              </S.StepsContent>
+            </S.StepsBox>
+            <S.CTAButton>
               <span>Concorra agora mesmo</span>
               <FutureImage
                 src={'/icons/clover-green.svg'}
@@ -51,8 +35,8 @@ export function HowIsEasySection() {
                 width={32}
                 height={32}
               />
-            </CTAButton>
-            <BePartYouTooBox>
+            </S.CTAButton>
+            <S.BePartYouTooBox>
               <FutureImage
                 src={'/images/participants.svg'}
                 alt="Trevo"
@@ -66,11 +50,11 @@ export function HowIsEasySection() {
                   <br /> também!
                 </span>
               </p>
-            </BePartYouTooBox>
-          </SeeHowIsEasyColumn>
+            </S.BePartYouTooBox>
+          </S.SeeHowIsEasyColumn>
 
-          <ImageGalery>
-            <BoxOne>
+          <S.ImageGalery>
+            <S.BoxOne>
               <FutureImage
                 className="image-galery-1"
                 src={'/images/image-galery-1.jpg'}
@@ -85,8 +69,8 @@ export function HowIsEasySection() {
                 width={217}
                 height={231}
               />
-            </BoxOne>
-            <BoxTwo>
+            </S.BoxOne>
+            <S.BoxTwo>
               <FutureImage
                 className="image-galery-3"
                 src={'/images/image-galery-3.jpg'}
@@ -94,17 +78,17 @@ export function HowIsEasySection() {
                 width={217}
                 height={478}
               />
-            </BoxTwo>
-          </ImageGalery>
-        </RegisterSteps>
+            </S.BoxTwo>
+          </S.ImageGalery>
+        </S.RegisterSteps>
 
-        <Atractions>
+        <S.Atractions>
           <h3>
             Grandes atrações esperando <span> por você!</span>
           </h3>
 
-          <AtractionsList>
-            <AtractionCard>
+          <S.AtractionsList>
+            <S.AtractionCard>
               <FutureImage
                 className="atraction-img"
                 src={'/images/atraction-1.jpg'}
@@ -124,8 +108,8 @@ export function HowIsEasySection() {
                   />
                 </button>
               </div>
-            </AtractionCard>
-            <AtractionCard>
+            </S.AtractionCard>
+            <S.AtractionCard>
               <FutureImage
                 className="atraction-img"
                 src={'/images/atraction-1.jpg'}
@@ -145,8 +129,8 @@ export function HowIsEasySection() {
                   />
                 </button>
               </div>
-            </AtractionCard>
-            <AtractionCard>
+            </S.AtractionCard>
+            <S.AtractionCard>
               <FutureImage
                 className="atraction-img"
                 src={'/images/atraction-1.jpg'}
@@ -166,8 +150,8 @@ export function HowIsEasySection() {
                   />
                 </button>
               </div>
-            </AtractionCard>
-            <AtractionCard>
+            </S.AtractionCard>
+            <S.AtractionCard>
               <FutureImage
                 className="atraction-img"
                 src={'/images/atraction-1.jpg'}
@@ -187,10 +171,10 @@ export function HowIsEasySection() {
                   />
                 </button>
               </div>
-            </AtractionCard>
-          </AtractionsList>
-        </Atractions>
-      </Content>
-    </Container>
+            </S.AtractionCard>
+          </S.AtractionsList>
+        </S.Atractions>
+      </S.Content>
+    </S.Container>
   )
 }
