@@ -1,5 +1,6 @@
 import * as S from './HowIsEasySectionStyles'
 import FutureImage from 'next/future/image'
+import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
 export function HowIsEasySection() {
   return (
     <S.Container>
@@ -27,15 +28,7 @@ export function HowIsEasySection() {
                 <span>Concorra a uma viagem para a Disney</span>
               </S.StepsContent>
             </S.StepsBox>
-            <S.CTAButton>
-              <span>Concorra agora mesmo</span>
-              <FutureImage
-                src={'/icons/clover-green.svg'}
-                alt="Trevo"
-                width={32}
-                height={32}
-              />
-            </S.CTAButton>
+            <CTAButton />
             <S.BePartYouTooBox>
               <FutureImage
                 src={'/images/participants.svg'}
