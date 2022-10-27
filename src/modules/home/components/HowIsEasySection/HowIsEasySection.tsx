@@ -29,7 +29,7 @@ export function HowIsEasySection() {
                 <span>Concorra a uma viagem para a Disney</span>
               </S.StepsContent>
             </S.StepsBox>
-            <CTAButton />
+            <CTAButton text="Concorra agora mesmo" />
             <S.BePartYouTooBox>
               <FutureImage
                 src={'/images/participants.svg'}

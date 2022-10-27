@@ -33,7 +33,7 @@ export const Container = styled.section`
 
     h2 {
       font-weight: 600;
-      font-size: 2.4rem;
+      font-size: 2.1rem;
       max-width: 935px;
       text-align: center;
       line-height: 3rem;
