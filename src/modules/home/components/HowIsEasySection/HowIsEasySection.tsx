@@ -1,5 +1,5 @@
 import * as S from './HowIsEasySectionStyles'
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
 import { AtractionCard } from '@/modules/home/components/HowIsEasySection/AtractionCard/AtractionCard'
 export function HowIsEasySection() {

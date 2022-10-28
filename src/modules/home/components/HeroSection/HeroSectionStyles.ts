@@ -31,8 +31,10 @@ export const Header = styled.header`
   justify-content: space-between;
   margin-bottom: 3.6rem;
   .logo {
-    width: 17.8rem;
-    height: 2.4rem;
+    img {
+      width: 17.8rem;
+      height: 2.4rem;
+    }
   }
 
   div {
@@ -59,8 +61,10 @@ export const Header = styled.header`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     .logo {
-      width: 34.5rem;
-      height: 5rem;
+      img {
+        width: 34.5rem;
+        height: 5rem;
+      }
     }
 
     div {

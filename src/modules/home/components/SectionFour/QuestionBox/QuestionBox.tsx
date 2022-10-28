@@ -1,4 +1,4 @@
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 import { Question, Container, Response } from './QuestionBoxStyles'
 
 interface QuestionBoxProps {

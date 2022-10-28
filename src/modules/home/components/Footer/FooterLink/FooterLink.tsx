@@ -1,7 +1,5 @@
 import { AnchorHTMLAttributes } from 'react'
-import { Container } from './FooterLinkStyles'
-
-import Link from 'next/link'
+import { Link } from './FooterLinkStyles'
 
 interface FooterLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   linkText: string
@@ -9,8 +7,8 @@ interface FooterLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 export function FooterLink({ linkText, href, ...rest }: FooterLinkProps) {
   return (
-    <Link style={{ textDecoration: 'none' }} href={String(href)}>
-      <Container {...rest}>{linkText}</Container>
+    <Link style={{ textDecoration: 'none' }} href={String(href)} {...rest}>
+      {linkText}
     </Link>
   )
 }

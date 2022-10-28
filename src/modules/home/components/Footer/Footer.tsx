@@ -1,24 +1,22 @@
 import { FooterLink } from './FooterLink/FooterLink'
 import Link from 'next/link'
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 import * as S from './FooterStyles'
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
 
-export function Footer() {
+export default function Footer() {
   return (
     <S.Container>
       <S.HeaderContainer>
         <S.FooterHeader>
           <S.HeaderBox>
-            <Link href="/">
-              <a className="logo">
-                <FutureImage
-                  src={'/icons/logo.svg'}
-                  width={345}
-                  height={50}
-                  alt="Logo MEGASONHO"
-                />
-              </a>
+            <Link className="logo" href="/">
+              <FutureImage
+                src={'/icons/logo.svg'}
+                width={345}
+                height={50}
+                alt="Logo MEGASONHO"
+              />
             </Link>
 
             <div>

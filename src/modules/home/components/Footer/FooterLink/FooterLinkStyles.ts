@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import NextLink from 'next/link'
 
-export const Container = styled.a`
+export const Link = styled(NextLink)`
   font-size: 16px;
   color: ${({ theme }) => theme.colors.white};
   font-weight: 400;

@@ -1,5 +1,5 @@
 import * as S from './AtractionCardStyles'
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 
 interface AtractionCardProps {
   name: string

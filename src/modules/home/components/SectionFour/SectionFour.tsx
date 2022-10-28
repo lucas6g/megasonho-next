@@ -1,8 +1,8 @@
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 import { QuestionBox } from './QuestionBox/QuestionBox'
 import * as S from './SectionFourStyles'
-export function SectionFour() {
+export default function SectionFour() {
   return (
     <S.Container>
       <S.IsFreeContent>

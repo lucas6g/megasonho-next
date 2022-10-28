@@ -1,7 +1,7 @@
 import { Container } from './VideoSectionStyles'
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 
-export function VideoSection() {
+export default function VideoSection() {
   return (
     <Container>
       <div>

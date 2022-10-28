@@ -1,4 +1,4 @@
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import pt from 'react-phone-input-2/lang/pt.json'
@@ -22,16 +22,13 @@ export function HeroSection() {
       />
       <S.Wrapper>
         <S.Header>
-          <Link href="/">
-            <a>
-              <FutureImage
-                className="logo"
-                src={'/icons/logo.svg'}
-                alt="Logo da MEGASONHO"
-                width={345}
-                height={50}
-              />
-            </a>
+          <Link className="logo" href="/">
+            <FutureImage
+              src={'/icons/logo.svg'}
+              alt="Logo da MEGASONHO"
+              width={345}
+              height={50}
+            />
           </Link>
 
           <div>

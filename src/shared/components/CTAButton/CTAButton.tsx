@@ -1,4 +1,4 @@
-import FutureImage from 'next/future/image'
+import FutureImage from 'next/image'
 import { ButtonHTMLAttributes } from 'react'
 import * as S from './CTAButtonStyles'
 interface CTAButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
