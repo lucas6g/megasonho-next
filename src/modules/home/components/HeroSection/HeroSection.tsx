@@ -59,6 +59,23 @@ export function HeroSection() {
                 height={32}
               />
             </a>
+            <S.Button>
+              <span>Login</span>
+              <FutureImage
+                className="arrow-right-green"
+                src="/icons/arrow-right-green.svg"
+                alt="Seta para direita"
+                width={25}
+                height={25}
+              />
+              <FutureImage
+                className="arrow-right-white"
+                src="/icons/arrow-right-white.svg"
+                alt="Seta para direita"
+                width={25}
+                height={25}
+              />
+            </S.Button>
           </div>
         </S.Header>
 
@@ -78,7 +95,7 @@ export function HeroSection() {
               Se inscreva e concorra a viagem dos <br />
               seus sonhos para sua família e amigos.
             </h2>
-            <S.ItsFreeCTAButton>
+            <S.Button>
               <span>É totalmente grátis</span>
               <FutureImage
                 className="arrow-right-green"
@@ -94,7 +111,7 @@ export function HeroSection() {
                 width={25}
                 height={25}
               />
-            </S.ItsFreeCTAButton>
+            </S.Button>
           </S.InfoCollun>
 
           <S.WhatsAppForm>

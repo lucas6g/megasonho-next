@@ -4,6 +4,7 @@ export const Container = styled.section`
   margin-top: 3.2rem;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding-top: 13.9rem;
+    margin-bottom: 9.8rem;
     margin-top: 0;
   }
 `

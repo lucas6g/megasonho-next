@@ -36,9 +36,24 @@ export const Header = styled.header`
   }
 
   div {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
     img {
       width: 2.9rem;
       height: 2.9rem;
+    }
+    button {
+      margin: 0;
+      min-width: 12.6rem;
+      height: 4rem;
+      img {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+    a {
+      display: none;
     }
   }
 
@@ -47,10 +62,14 @@ export const Header = styled.header`
       width: 34.5rem;
       height: 5rem;
     }
+
     div {
       img {
         width: 3.2rem;
         height: 3.2rem;
+      }
+      a {
+        display: inline;
       }
     }
   }
@@ -97,6 +116,10 @@ export const InfoCollun = styled.div`
     z-index: 0;
   }
 
+  button {
+    display: none;
+  }
+
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     h1 {
       font-size: 2.4rem;
@@ -125,50 +148,49 @@ export const InfoCollun = styled.div`
       top: 67px;
       width: 38rem;
     }
+    button {
+      display: flex;
+    }
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-bottom: 0;
   }
 `
-export const ItsFreeCTAButton = styled.button`
-  display: none;
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: flex;
-    margin-top: 3.6rem;
-    max-width: 23.3rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
-    align-items: center;
-    border-radius: 10rem;
-    height: 4.8rem;
-    border: none;
-    transition: background 0.5s;
-    background-color: ${({ theme }) => theme.colors.gray};
+export const Button = styled.button`
+  margin-top: 3.6rem;
+  max-width: 23.3rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  align-items: center;
+  border-radius: 10rem;
+  height: 4.8rem;
+  border: none;
+  transition: background 0.5s;
+  background-color: ${({ theme }) => theme.colors.gray};
 
+  span {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    color: ${({ theme }) => theme.colors.darkBlue};
+  }
+
+  .arrow-right-white {
+    display: none;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.green};
+    border-bottom: 3px solid #007541;
     span {
-      font-weight: 500;
-      font-size: 1.6rem;
-      line-height: 2rem;
-      color: ${({ theme }) => theme.colors.darkBlue};
+      color: ${({ theme }) => theme.colors.white};
     }
-
     .arrow-right-white {
-      display: none;
+      display: block;
     }
-
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.green};
-      border-bottom: 3px solid #007541;
-      span {
-        color: ${({ theme }) => theme.colors.white};
-      }
-      .arrow-right-white {
-        display: block;
-      }
-      .arrow-right-green {
-        display: none;
-      }
+    .arrow-right-green {
+      display: none;
     }
   }
 `

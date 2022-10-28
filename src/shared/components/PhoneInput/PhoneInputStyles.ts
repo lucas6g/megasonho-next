@@ -29,6 +29,15 @@ export const Phone = styled(ReactPhoneInput)`
     .selected-flag {
       padding: 0;
       width: 3.2rem;
+      &:hover {
+        background-color: transparent;
+      }
+      .flag {
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+      }
       .arrow {
         display: none;
       }
