@@ -1,13 +1,13 @@
-import { AnchorHTMLAttributes } from 'react'
 import { Link } from './FooterLinkStyles'
 
-interface FooterLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface FooterLinkProps {
   linkText: string
+  href: string
 }
 
-export function FooterLink({ linkText, href, ...rest }: FooterLinkProps) {
+export function FooterLink({ linkText, href }: FooterLinkProps) {
   return (
-    <Link style={{ textDecoration: 'none' }} href={String(href)} {...rest}>
+    <Link style={{ textDecoration: 'none' }} href={href}>
       {linkText}
     </Link>
   )

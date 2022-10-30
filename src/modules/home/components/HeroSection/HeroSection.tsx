@@ -1,13 +1,33 @@
 import FutureImage from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
 import pt from 'react-phone-input-2/lang/pt.json'
 import { Button } from '@/shared/components/Button/Button'
 import { PhoneInput } from '@/shared/components/PhoneInput/PhoneInput'
+import { yupResolver } from '@hookform/resolvers/yup'
 import * as S from './HeroSectionStyles'
-
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { validatePhone } from '@/shared/validation/phoneValidationScema'
+import { Header } from '@/modules/home/components/Header/Header'
+import { HeroSectionButton } from '@/modules/home/components/HeroSectionButton/HeroSectionButton'
+interface IFormInput {
+  phone: string
+}
 export function HeroSection() {
-  const [whatsApp, setWhatsApp] = useState('')
+  const [isSelectingCountryCode, selectCoutryCode] = useState(true)
+  const [countryCode, setCountryCode] = useState('BR')
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid }
+  } = useForm<IFormInput>({
+    resolver: yupResolver(validatePhone(countryCode)),
+    mode: 'all'
+  })
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data)
+  }
 
   return (
     <S.Container>
@@ -21,61 +41,7 @@ export function HeroSection() {
         priority
       />
       <S.Wrapper>
-        <S.Header>
-          <Link className="logo" href="/">
-            <FutureImage
-              src={'/icons/logo.svg'}
-              alt="Logo da MEGASONHO"
-              width={345}
-              height={50}
-            />
-          </Link>
-
-          <div>
-            <a
-              href="https://api.whatsapp.com/send?1=pt_br&phone=5511973796061&text=Ola%20MEGASONHO!"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FutureImage
-                src={'/icons/whatsapp.svg'}
-                alt="Icone Do Whatsapp"
-                width={32}
-                height={32}
-              />
-            </a>
-            <a
-              href="https://www.instagram.com/megasonho.com.br/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FutureImage
-                src={'/icons/instagran.svg'}
-                alt="Icone Do Instagran"
-                width={32}
-                height={32}
-              />
-            </a>
-            <S.Button>
-              <span>Login</span>
-              <FutureImage
-                className="arrow-right-green"
-                src="/icons/arrow-right-green.svg"
-                alt="Seta para direita"
-                width={25}
-                height={25}
-              />
-              <FutureImage
-                className="arrow-right-white"
-                src="/icons/arrow-right-white.svg"
-                alt="Seta para direita"
-                width={25}
-                height={25}
-              />
-            </S.Button>
-          </div>
-        </S.Header>
-
+        <Header />
         <S.SectionContent>
           <S.InfoCollun>
             <h1>
@@ -92,50 +58,49 @@ export function HeroSection() {
               Se inscreva e concorra a viagem dos <br />
               seus sonhos para sua família e amigos.
             </h2>
-            <S.Button>
-              <span>É totalmente grátis</span>
-              <FutureImage
-                className="arrow-right-green"
-                src="/icons/arrow-right-green.svg"
-                alt="Seta para direita"
-                width={25}
-                height={25}
-              />
-              <FutureImage
-                className="arrow-right-white"
-                src="/icons/arrow-right-white.svg"
-                alt="Seta para direita"
-                width={25}
-                height={25}
-              />
-            </S.Button>
+            <HeroSectionButton text="É totalmente grátis" />
           </S.InfoCollun>
 
-          <S.WhatsAppForm>
+          <S.WhatsAppForm onSubmit={handleSubmit(onSubmit)}>
             <h3>
               Preencha com o seu <br /> WhatsApp e concorra
             </h3>
 
-            <PhoneInput
-              dropdownClass="input-phone-dropdown"
-              buttonClass="input-phone-button"
-              inputClass="phone-input"
-              country={'br'}
-              localization={pt}
-              masks={{ br: '(..) .....-....' }}
-              inputProps={{
-                value: whatsApp
-              }}
-              onChange={(value, data: any, _, formattedValue) => {
-                if (value === data.dialCode) {
-                  setWhatsApp('')
-                } else {
-                  setWhatsApp(formattedValue)
-                }
-              }}
-              placeholder="Número do WhatsApp"
-              disableCountryCode
-              disableCountryGuess
+            <Controller
+              control={control}
+              name="phone"
+              defaultValue=""
+              render={({ field }) => (
+                <PhoneInput
+                  isCorrect={isValid}
+                  error={errors.phone}
+                  dropdownClass="input-phone-dropdown"
+                  buttonClass="input-phone-button"
+                  inputClass="phone-input"
+                  country={'br'}
+                  localization={pt}
+                  masks={{ br: '(..) .....-....' }}
+                  inputProps={{
+                    id: 'phone',
+                    onBlur: field.onBlur,
+                    ...(isSelectingCountryCode && { value: field.value })
+                  }}
+                  value={field.value}
+                  onChange={(value, data: any, event, formattedValue) => {
+                    setCountryCode(data.countryCode.toUpperCase())
+                    if (value === data.dialCode) {
+                      field.onChange('')
+                      selectCoutryCode(true)
+                    } else {
+                      selectCoutryCode(false)
+                      field.onChange(formattedValue)
+                    }
+                  }}
+                  disableCountryCode
+                  placeholder="Número do WhatsApp"
+                  disableCountryGuess
+                />
+              )}
             />
 
             <Button>

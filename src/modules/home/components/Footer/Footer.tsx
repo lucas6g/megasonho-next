@@ -59,8 +59,8 @@ export default function Footer() {
           <S.LinksBlock>
             <S.LinksBlockTitle>Saiba mais</S.LinksBlockTitle>
             <FooterLink linkText="Quem somos" href="/about-us" />
-            <FooterLink linkText="Nossas políticas" href="#" />
-            <FooterLink linkText="Contato" href="#" />
+            <FooterLink linkText="Nossas políticas" href="/" />
+            <FooterLink linkText="Contato" href="/" />
           </S.LinksBlock>
 
           <S.CertificateBox>
