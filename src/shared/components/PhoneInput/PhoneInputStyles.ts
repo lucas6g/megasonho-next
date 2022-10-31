@@ -56,7 +56,12 @@ export const Phone = styled(ReactPhoneInput)<PhoneProps>`
     padding-left: 3.2rem;
     color: ${({ theme }) => theme.colors.darkBlue};
     font-weight: 500;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    &::placeholder {
+      color: #828b8f;
+      font-weight: 400;
+      font-size: 1.6rem;
+    }
 
     ${props =>
       props.isError &&

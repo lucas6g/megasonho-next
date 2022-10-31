@@ -1,8 +1,11 @@
 import { HeroSectionButton } from '@/modules/home/components/HeroSectionButton/HeroSectionButton'
 import FutureImage from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import * as S from './HeaderStyles'
 export function Header() {
+  const router = useRouter()
+
   return (
     <S.Header>
       <Link className="logo" href="/">
@@ -39,7 +42,12 @@ export function Header() {
             height={32}
           />
         </a>
-        <HeroSectionButton text="Login" />
+        <HeroSectionButton
+          onClick={() => {
+            router.push('/login')
+          }}
+          text="Login"
+        />
       </div>
     </S.Header>
   )
