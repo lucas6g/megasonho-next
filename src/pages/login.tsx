@@ -123,6 +123,7 @@ const Login: NextPage = () => {
                     inputProps={{
                       id: 'phone',
                       onBlur: field.onBlur,
+                      ref: field.ref,
                       ...(isSelectingCountryCode && { value: field.value })
                     }}
                     value={field.value}
