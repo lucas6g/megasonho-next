@@ -2,22 +2,22 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   position: relative;
+  height: 100vh;
+  overflow: hidden;
   .login-back {
-    overflow: hidden;
     width: 100%;
     object-fit: cover;
-    height: 100vh;
   }
 `
 export const Wrapper = styled.div`
   position: absolute;
   top: 2.6rem;
-  max-width: 120rem;
-  width: 100%;
-  padding: 0 1.6rem;
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+  max-width: 120rem;
+  width: 100%;
+  padding: 0 1.6rem;
 `
 
 export const Content = styled.div`
@@ -25,8 +25,8 @@ export const Content = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  @media (min-width: 1024px) {
-    padding-top: 20px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-top: 2rem;
   }
 `
 export const Header = styled.header`
@@ -34,62 +34,62 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     justify-content: flex-end;
   }
 `
 export const LogoMobile = styled.div`
   a {
     img {
-      max-width: 176px;
+      max-width: 17.6rem;
       width: 100%;
-      height: 24px;
+      height: 2.4rem;
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
   }
 `
 export const SectionForm = styled.section`
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
-    margin-top: 108px;
+    margin-top: 10.8rem;
     align-items: flex-start;
     justify-content: space-between;
   }
 `
 export const LogoDesktop = styled.div`
   display: none;
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: block;
-    margin-top: 64px;
+    margin-top: 6.4rem;
 
     a {
       img {
-        max-width: 512px;
+        max-width: 51.2rem;
         width: 100%;
-        height: 72px;
+        height: 7.2rem;
       }
     }
   }
 `
 export const LoginForm = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 16px;
+  border-radius: 1.6rem;
   width: 100%;
-  padding: 40px 16px;
+  padding: 4rem 1.6rem;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 3.2rem;
 
   p {
     font-weight: 500;
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 1.6rem;
+    line-height: 2.8rem;
     color: ${({ theme }) => theme.colors.darkBlue};
     opacity: 0.6;
-    margin: 8px 0;
+    margin: 0.8rem 0;
   }
   .forgot-password {
     background: transparent;
@@ -97,7 +97,7 @@ export const LoginForm = styled.form`
     text-decoration: none;
     display: inline-block;
     color: ${({ theme }) => theme.colors.blue};
-    font-size: 16px;
+    font-size: 1.6rem;
     align-self: flex-end;
   }
 
@@ -105,7 +105,7 @@ export const LoginForm = styled.form`
     content: '';
     display: block;
     width: 0px;
-    height: 2px;
+    height: 0.2rem;
     background: ${({ theme }) => theme.colors.blue};
     transition: width 0.7s;
   }
@@ -113,12 +113,12 @@ export const LoginForm = styled.form`
     width: 100%;
   }
 
-  @media (min-width: 1024px) {
-    max-width: 360px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    max-width: 36rem;
   }
 `
 export const LoginFormTitle = styled.h1`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 2.4rem;
   color: ${({ theme }) => theme.colors.darkBlue};
 `

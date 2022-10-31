@@ -21,6 +21,7 @@ export const InputBlock = styled.div<InputBlockProps>`
   flex-direction: column;
   border: none;
   border-bottom: 2px solid #cfd3d5;
+
   ${props =>
     props.isCorrect &&
     css`
@@ -58,6 +59,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   font-weight: 500;
   font-size: 1.6rem;
   color: ${({ theme }) => theme.colors.darkBlue};
+  padding-bottom: 8px;
 
   ${props =>
     props.isError &&
