@@ -1,5 +1,5 @@
 import { FieldError } from 'react-hook-form'
-import { Container, InputBlock, StyledInput } from './InputStyles'
+import { Container, InputBlock, StyledInput } from './MaskedInputStyles'
 import Image from 'next/image'
 import { InputHTMLAttributes } from 'react'
 
@@ -9,15 +9,16 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: FieldError
   register: any
   isCorrect?: boolean
+  mask: string
 }
 
-export function Input({
+export function MaskedInput({
   label,
   error,
   register,
+  mask,
   name,
   isCorrect = false,
-
   ...rest
 }: InputProps) {
   return (
@@ -26,7 +27,9 @@ export function Input({
         {!!label && <label htmlFor={name}>{label}</label>}
         <div>
           <StyledInput
+            mask={mask}
             isError={!!error}
+            maskChar={null}
             id={name}
             {...register(name)}
             {...rest}

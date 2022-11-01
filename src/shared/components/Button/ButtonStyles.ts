@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.button`
-  height: 4.4rem;
+  height: 4.8rem;
   border-radius: 10rem;
   padding: 0.8rem 0;
   display: flex;
