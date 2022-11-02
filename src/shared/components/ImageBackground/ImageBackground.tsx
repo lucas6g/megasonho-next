@@ -14,11 +14,13 @@ export function ImageBackground({ imgUrl }: ImageBackgroundProps) {
         alt="Image de fundo"
         width={976}
         height={1010}
+        quality={100}
+        priority
       />
       <div>
         <Image
           src={'/icons/logo.svg'}
-          alt="Imagem de fundo"
+          alt="Logo MEGASONHO"
           width={345}
           height={50}
         />

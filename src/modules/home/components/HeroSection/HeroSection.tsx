@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { validatePhone } from '@/shared/validation/phoneValidationScema'
 import { Header } from '@/modules/home/components/Header/Header'
 import { HeroSectionButton } from '@/modules/home/components/HeroSectionButton/HeroSectionButton'
+import { useRouter } from 'next/router'
 interface IFormInput {
   phone: string
 }
@@ -25,8 +26,10 @@ export function HeroSection() {
     mode: 'all'
   })
 
+  const router = useRouter()
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data)
+    router.push('/register')
   }
 
   return (

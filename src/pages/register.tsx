@@ -12,6 +12,7 @@ import { getRegisterPageValidationScemma } from '@/modules/register/validation/g
 import Image from 'next/image'
 import Link from 'next/link'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 interface FormData {
   name: string
@@ -42,7 +43,10 @@ const Register: NextPage = () => {
     formState
   )
 
-  async function handleRegisterParticipant(values: FormData) {}
+  const router = useRouter()
+  async function handleRegisterParticipant(values: FormData) {
+    router.push('/whatsapp-confirmation')
+  }
 
   return (
     <>

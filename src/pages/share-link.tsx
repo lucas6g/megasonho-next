@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import api from '@/shared/services/api'
 import { NextPage } from 'next'
 import { HeaderPainel } from '@/shared/components/HeaderPainel/HeaderPainel'
+import { useRouter } from 'next/router'
 
 const ShareLink: NextPage = () => {
   let baseUrl = ''
@@ -16,6 +17,7 @@ const ShareLink: NextPage = () => {
   }
   const shareLinkUrl = `${baseUrl}/?r=${''}`
   const [copied, copy, setCopied] = useCopy(shareLinkUrl)
+  const router = useRouter()
 
   useEffect(() => {
     async function sendShareLink() {
@@ -76,7 +78,11 @@ const ShareLink: NextPage = () => {
           </p>
 
           <S.LinkBox>
-            <input readOnly type="text" value={shareLinkUrl} />
+            <input
+              readOnly
+              type="text"
+              value={'https://www.megasonho.com.br'}
+            />
 
             <S.CopyButton onClick={handleCopyToClipBoard}>
               {copied ? (
@@ -97,7 +103,12 @@ const ShareLink: NextPage = () => {
             cadastro.
           </span>
 
-          <Button className="continue">
+          <Button
+            onClick={() => {
+              router.push('plans')
+            }}
+            className="continue"
+          >
             <span>Continuar</span>
           </Button>
         </S.ShareLinkContent>

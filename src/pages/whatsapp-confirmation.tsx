@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import * as S from '@/modules/whats-confirmation/styles/WhatsappConfirmationStyles'
@@ -5,9 +6,11 @@ import api from '@/shared/services/api'
 import { ImageBackground } from '@/shared/components/ImageBackground/ImageBackground'
 import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 const WhatsappConfirmation: NextPage = () => {
   const [token, setToken] = useState('')
+  const router = useRouter()
 
   const [
     whatsConfirmationCodeErrorMessage,
@@ -107,7 +110,9 @@ const WhatsappConfirmation: NextPage = () => {
             type="text"
             isErrored={confirmationCodeError}
             autoFocus
-            onCompleted={handleConfirmWhats}
+            onCompleted={() => {
+              router.push('/lucky-number')
+            }}
             length={6}
             placeholder=""
           />
