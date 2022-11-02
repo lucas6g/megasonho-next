@@ -11,15 +11,17 @@ import { validate } from 'gerador-validador-cpf'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { MaskedInput } from '@/shared/components/MaskedInput/MaskedInput'
+import { useRouter } from 'next/router'
 interface FormData {
   document: string
 }
 
 const LuckyNumber: NextPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [freeLuckyNumber, setFreeLuckyNUmber] = useState('')
-
+  const router = useRouter()
   async function handleValidateLuckyNumber(values: FormData) {
-    console.log(values)
+    router.push('/share-link')
   }
 
   const formSchema = yup.object().shape({
@@ -106,7 +108,7 @@ const LuckyNumber: NextPage = () => {
           </p>
 
           <S.LuckyNumberBox>
-            <strong>{freeLuckyNumber}</strong>
+            <strong>1.234.567.890</strong>
             <Image
               src={'/icons/green-clover.svg'}
               alt="Icone Trevo verde"

@@ -11,11 +11,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { Input } from '@/shared/components/Input/Input'
 import 'yup-phone'
+import { useRouter } from 'next/router'
 interface IFormInput {
   phone: string
   password: string
 }
 const Login: NextPage = () => {
+  const router = useRouter()
   const [isSelectingCountryCode, selectCoutryCode] = useState(true)
   const [countryCode, setCountryCode] = useState('BR')
   const formSchema = yup.object().shape({
@@ -36,7 +38,7 @@ const Login: NextPage = () => {
   const passowordState = getFieldState('password', formState)
 
   const loginSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data)
+    router.push('/plans')
   }
 
   return (
