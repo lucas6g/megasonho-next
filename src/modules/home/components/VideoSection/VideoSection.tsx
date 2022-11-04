@@ -17,7 +17,7 @@ export default function VideoSection() {
           presentei-se com essa viagem inesquecível.
         </h2>
       </div>
-      <video disablePictureInPicture autoPlay loop muted>
+      <video disablePictureInPicture autoPlay loop muted playsInline>
         <source
           src="https://megasonho-public.s3.amazonaws.com/apresentacao-disney.mp4"
           type="video/mp4"

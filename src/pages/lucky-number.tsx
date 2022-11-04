@@ -130,7 +130,7 @@ const LuckyNumber: NextPage = () => {
             mask="999.999.999-99"
             error={formState.errors.document}
             label="CPF:"
-            type="text"
+            type="tel"
             className="input-container"
             placeholder="Insira o seu CPF"
           />
