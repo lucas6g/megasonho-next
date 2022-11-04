@@ -60,11 +60,10 @@ export const ShareLinkContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 16px;
   border-radius: 4px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   .continue {
-    margin-top: 24px;
+    margin-top: 72px;
   }
 
   h1 {
@@ -99,16 +98,14 @@ export const ShareLinkContent = styled.div`
   @media (min-width: 1024px) {
     max-width: 448px;
     padding: 0;
+    height: 100%;
     padding-top: 4.8rem;
     .continue {
       margin-bottom: 46px;
-    }
-  }
-  @media (min-height: 600px) {
-    .continue {
       margin-top: auto;
     }
   }
+
   @media (min-width: 768px) {
     h1 {
       font-size: 40px;

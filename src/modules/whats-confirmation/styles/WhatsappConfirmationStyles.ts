@@ -23,12 +23,11 @@ export const FormContainer = styled.div`
   background-position: 60%;
   background-size: cover;
   height: 100%;
-  padding-bottom: 32px;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 0;
     background-image: unset !important;
     height: 100vh;
   }
@@ -94,12 +93,10 @@ export const Form = styled.form<FormPros>`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 1.6rem;
   border-radius: 4px;
-  height: 100%;
   display: flex;
   flex-direction: column;
-
   .send-code-button {
-    margin-top: auto;
+    margin-top: 72px;
   }
 
   h1 {

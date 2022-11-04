@@ -16,7 +16,7 @@ export const LuckyNumberContainer = styled.div`
   background-position: 90%;
   background-size: cover;
   height: 100%;
-  padding-bottom: 32px;
+
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -82,11 +82,11 @@ export const LuckyNumberForm = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 16px;
   border-radius: 4px;
-  height: 100%;
   display: flex;
   flex-direction: column;
+
   .get-more-button {
-    margin-top: 24px;
+    margin-top: 72px;
   }
 
   h1 {
@@ -130,14 +130,10 @@ export const LuckyNumberForm = styled.form`
     }
   }
 
-  @media (min-height: 600px) {
+  @media (min-width: 1024px) {
+    height: 100%;
     .get-more-button {
       margin-top: auto;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .get-more-button {
       margin-bottom: 46px;
     }
     padding: 0;

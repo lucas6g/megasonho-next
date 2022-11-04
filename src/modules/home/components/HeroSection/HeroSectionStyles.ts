@@ -134,7 +134,7 @@ export const WhatsAppForm = styled.form`
     }
   }
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+  @media (min-width: 321px) {
     height: 26.4rem;
     h3 {
       margin-bottom: 2.4rem;
