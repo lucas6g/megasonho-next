@@ -107,55 +107,59 @@ const Login: NextPage = () => {
 
             <S.LoginForm onSubmit={handleSubmit(loginSubmit)}>
               <S.LoginFormTitle>Faça seu login</S.LoginFormTitle>
-              <Controller
-                control={control}
-                name="phone"
-                defaultValue=""
-                render={({ field }) => (
-                  <PhoneInput
-                    isCorrect={!formState.errors.phone && phoneState.isDirty}
-                    error={formState.errors.phone}
-                    dropdownClass="input-phone-dropdown"
-                    buttonClass="input-phone-button"
-                    inputClass="phone-input"
-                    country={'br'}
-                    localization={pt}
-                    label="Número do Whatsapp:"
-                    masks={{ br: '(..) .....-....' }}
-                    inputProps={{
-                      id: 'phone',
-                      onBlur: field.onBlur,
-                      ref: field.ref,
-                      ...(isSelectingCountryCode && { value: field.value })
-                    }}
-                    value={field.value}
-                    onChange={(value, data: any, event, formattedValue) => {
-                      setCountryCode(data.countryCode.toUpperCase())
-                      if (value === data.dialCode) {
-                        field.onChange('')
-                        selectCoutryCode(true)
-                      } else {
-                        selectCoutryCode(false)
-                        field.onChange(formattedValue)
-                      }
-                    }}
-                    disableCountryCode
-                    placeholder="Número do WhatsApp"
-                    disableCountryGuess
-                  />
-                )}
-              />
+              <div className="gap">
+                <Controller
+                  control={control}
+                  name="phone"
+                  defaultValue=""
+                  render={({ field }) => (
+                    <PhoneInput
+                      isCorrect={!formState.errors.phone && phoneState.isDirty}
+                      error={formState.errors.phone}
+                      dropdownClass="input-phone-dropdown"
+                      buttonClass="input-phone-button"
+                      inputClass="phone-input"
+                      country={'br'}
+                      localization={pt}
+                      label="Número do Whatsapp:"
+                      masks={{ br: '(..) .....-....' }}
+                      inputProps={{
+                        id: 'phone',
+                        onBlur: field.onBlur,
+                        ref: field.ref,
+                        ...(isSelectingCountryCode && { value: field.value })
+                      }}
+                      value={field.value}
+                      onChange={(value, data: any, event, formattedValue) => {
+                        setCountryCode(data.countryCode.toUpperCase())
+                        if (value === data.dialCode) {
+                          field.onChange('')
+                          selectCoutryCode(true)
+                        } else {
+                          selectCoutryCode(false)
+                          field.onChange(formattedValue)
+                        }
+                      }}
+                      disableCountryCode
+                      placeholder="Número do WhatsApp"
+                      disableCountryGuess
+                    />
+                  )}
+                />
+                <Input
+                  register={register}
+                  isCorrect={
+                    !formState.errors.password && passowordState.isDirty
+                  }
+                  name="password"
+                  error={formState.errors.password}
+                  label="Senha:"
+                  type="password"
+                  placeholder="Confirme a sua senha"
+                  className="input-container"
+                />
+              </div>
 
-              <Input
-                register={register}
-                isCorrect={!formState.errors.password && passowordState.isDirty}
-                name="password"
-                error={formState.errors.password}
-                label="Senha:"
-                type="password"
-                placeholder="Confirme a sua senha"
-                className="input-container"
-              />
               <button type="button" className="forgot-password">
                 Esqueci minha senha
               </button>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.section`
   margin-top: 3.2rem;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding-top: 13.9rem;
+    padding-top: 14rem;
     margin-bottom: 9.8rem;
     margin-top: 0;
   }
@@ -29,6 +29,9 @@ export const IsFreeContent = styled.div`
     #is-free {
       margin-bottom: 3.2rem;
     }
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
   }
 `
 export const BoxOne = styled.div`
@@ -130,5 +133,8 @@ export const QuestinsContainer = styled.div`
         display: none;
       }
     }
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
   }
 `

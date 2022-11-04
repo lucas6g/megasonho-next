@@ -1,14 +1,23 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.details`
+interface ContainerProps {
+  hasBorder: boolean
+}
+
+export const Container = styled.details<ContainerProps>`
   &[open] summary img {
     transform: rotate(360deg);
   }
+
   summary img {
     transform: rotate(180deg);
   }
 
-  border-bottom: 1px solid #e6e6e6;
+  ${props =>
+    props.hasBorder &&
+    css`
+      border-bottom: 1px solid #e6e6e6;
+    `};
 
   & summary::-webkit-details-marker {
     display: none;
@@ -51,6 +60,11 @@ export const Response = styled.div`
     text-align: left;
     margin-bottom: 1.6rem;
     color: ${({ theme }) => theme.colors.darkBlue};
+
+    a {
+      font-weight: bold;
+      color: ${({ theme }) => theme.colors.black};
+    }
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     p {

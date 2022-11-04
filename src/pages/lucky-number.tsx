@@ -103,8 +103,8 @@ const LuckyNumber: NextPage = () => {
           </h1>
 
           <p>
-            Aqui está o seu número que poderã trazer a tão sonhada viagem para
-            Walt Disney World?
+            Aqui está o seu número que poderá trazer a tão sonhada viagem para
+            Walt Disney World
           </p>
 
           <S.LuckyNumberBox>
@@ -135,7 +135,7 @@ const LuckyNumber: NextPage = () => {
             placeholder="Insira o seu CPF"
           />
 
-          <Button className="get-more-button">
+          <Button disabled={!formState.isValid} className="get-more-button">
             <span>Enviar</span>
           </Button>
         </S.LuckyNumberForm>

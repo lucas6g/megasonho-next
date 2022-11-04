@@ -184,7 +184,7 @@ const Register: NextPage = () => {
               </span>
             </S.TermsCheckBox>
 
-            <Button type="submit">
+            <Button disabled={!formState.isValid} type="submit">
               <span>Enviar</span>
             </Button>
           </S.Form>

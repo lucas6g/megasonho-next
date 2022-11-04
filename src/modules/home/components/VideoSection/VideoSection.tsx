@@ -14,7 +14,7 @@ export default function VideoSection() {
         />
         <h2>
           Viva momentos mágicos e <br /> se sinta criança <br /> novamente,
-          presenteie-se <br /> com esse presente <br /> inesquecível.
+          presentei-se com essa viagem inesquecível.
         </h2>
       </div>
       <video disablePictureInPicture autoPlay loop muted>

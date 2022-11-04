@@ -183,8 +183,8 @@ const Plans: NextPage = () => {
           <h1>Aqui será um título em destaque ⏱</h1>
 
           <p>
-            Essa oportunidade de aumentar a sua chance de ganhar e vai acabar
-            em:
+            Esta é a oportunidade de aumentar as suas chances de ganhar e vai
+            acabar em:
           </p>
 
           <S.TimeBox>
@@ -286,21 +286,21 @@ const Plans: NextPage = () => {
             />
             <PlanCard
               disabled={isButtonDisabled}
-              numbersQuantity={50}
-              price={'R$ 149,90'}
-              pricePernumber={'R$ 2,99'}
+              numbersQuantity={25}
+              price={'R$ 99,90'}
+              pricePernumber={'R$ 3,99'}
             />
             <PlanCard
               disabled={isButtonDisabled}
-              numbersQuantity={50}
-              price={'R$ 149,90'}
-              pricePernumber={'R$ 2,99'}
+              numbersQuantity={10}
+              price={'R$ 49,90'}
+              pricePernumber={'R$ 4,99'}
             />
             <PlanCard
               disabled={isButtonDisabled}
-              numbersQuantity={50}
-              price={'R$ 149,90'}
-              pricePernumber={'R$ 2,99'}
+              numbersQuantity={3}
+              price={'R$ 24,90'}
+              pricePernumber={'R$ 8,30'}
             />
           </S.NumbersPlansBox>
         </S.PlansContent>

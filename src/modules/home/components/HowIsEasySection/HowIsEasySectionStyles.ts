@@ -5,9 +5,13 @@ export const Content = styled.div`
   max-width: 120rem;
   padding: 0 1.6rem;
   margin: 0 auto;
-  margin-top: 3.2rem;
+  margin-top: 6.4rem;
+
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-top: 6.4rem;
+    margin-top: 14rem;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
   }
 `
 export const RegisterSteps = styled.div`
@@ -98,7 +102,7 @@ export const ImageGalery = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.2rem;
-  margin-top: 3.2rem;
+  margin-top: 6.4rem;
 
   img {
     width: 100%;
@@ -145,7 +149,7 @@ export const BoxTwo = styled.div`
   }
 `
 export const Atractions = styled.div`
-  margin-top: 3.2rem;
+  margin-top: 6.4rem;
 
   h3 {
     font-weight: 600;
@@ -160,7 +164,7 @@ export const Atractions = styled.div`
     }
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-top: 6.4rem;
+    margin-top: 14rem;
     h3 {
       margin-bottom: 3.2rem;
     }

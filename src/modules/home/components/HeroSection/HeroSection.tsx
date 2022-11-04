@@ -58,7 +58,7 @@ export function HeroSection() {
               height={18}
             />
             <h2>
-              Se inscreva e concorra a viagem dos <br />
+              Inscreva-se e concorra a viagem dos <br />
               seus sonhos para sua família e amigos.
             </h2>
             <HeroSectionButton text="É totalmente grátis" />
@@ -106,7 +106,21 @@ export function HeroSection() {
               )}
             />
 
-            <Button>
+            <Button disabled={!isValid}>
+              <FutureImage
+                className="lock-disabled"
+                src="/icons/lock.svg"
+                alt="Icone de um Cadeado"
+                width={15}
+                height={21}
+              />
+              <FutureImage
+                className="lock-enabled"
+                src="/icons/lock-gray.svg"
+                alt="Seta para direita"
+                width={15}
+                height={21}
+              />
               <span>Cadastrar</span>
             </Button>
           </S.WhatsAppForm>

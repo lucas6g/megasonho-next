@@ -10,7 +10,7 @@ export function HowIsEasySection() {
           <S.SeeHowIsEasyColumn>
             <h3>Veja como é fácil!</h3>
             <p>
-              Realize o seu sonho da viagem para Disney nas próximas férias.
+              Realize o seu sonho de viajar para Disney nas próximas férias.
               Seja criança novamente, se emocione com o show de fogos.{' '}
               <strong>Faça o cadastro, é grátis!</strong>
             </p>

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.section`
-  margin-top: 3.2rem;
+  margin-top: 6.4rem;
   height: 812px;
 
   div {
@@ -56,6 +56,7 @@ export const Container = styled.section`
     object-fit: cover;
   }
   @media (min-width: 1024px) {
+    margin-top: 14rem;
     div {
       height: 1000px;
     }

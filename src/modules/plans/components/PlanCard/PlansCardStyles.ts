@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Plan = styled.button`
   background-color: ${({ theme }) => theme.colors.gray};
-  padding: 16px 9px;
+  padding: 8px;
   background: #f4f4f4;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -20,21 +20,21 @@ export const Plan = styled.button`
 
     .numbers-quantity {
       font-weight: 700;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 24px;
       color: ${({ theme }) => theme.colors.black};
     }
   }
+  .plan-price {
+    font-size: 20px;
+    color: ${({ theme }) => theme.colors.black};
+    margin-bottom: 4px;
+  }
   .price-per-number {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
     color: ${({ theme }) => theme.colors.black};
     opacity: 0.7;
-  }
-
-  .plan-price {
-    font-size: 24px;
-    color: ${({ theme }) => theme.colors.black};
   }
 
   transition: background-color 0.5s;
@@ -66,6 +66,20 @@ export const Plan = styled.button`
       span {
         color: ${({ theme }) => theme.colors.white};
       }
+    }
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    div {
+      .numbers-quantity {
+        font-size: 12px;
+      }
+    }
+
+    .plan-price {
+      font-size: 24px;
+    }
+    .price-per-number {
+      font-size: 10px;
     }
   }
 

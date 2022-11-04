@@ -4,7 +4,7 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 3.6rem;
+  margin-bottom: 2.4rem;
   .logo {
     img {
       width: 17.8rem;
@@ -32,6 +32,9 @@ export const Header = styled.header`
     a {
       display: none;
     }
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin-bottom: 3.6rem;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
