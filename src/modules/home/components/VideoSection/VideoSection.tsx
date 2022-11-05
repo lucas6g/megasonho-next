@@ -7,7 +7,7 @@ export default function VideoSection() {
     const ua = navigator.userAgent.toLowerCase()
     return ua.includes('safari') && !ua.includes('chrome')
   }
-  const videoParentRef = useRef()
+  const videoParentRef = useRef<any>()
 
   useEffect(() => {
     // check if user agent is safari and we have the ref to the container <div />
