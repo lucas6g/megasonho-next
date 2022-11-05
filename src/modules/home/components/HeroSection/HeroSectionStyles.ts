@@ -1,14 +1,11 @@
 import styled from 'styled-components'
 
 export const Container = styled.main`
-  height: 100vh;
-  position: relative;
-
   .hero-back {
     width: 100%;
     object-fit: cover;
     object-position: 25%;
-    height: 100vh;
+    min-height: 100vh;
   }
 `
 export const Wrapper = styled.div`
@@ -149,7 +146,7 @@ export const WhatsAppForm = styled.form`
 `
 
 export const CertificationContainer = styled.div`
-  margin-top: 2.4rem;
+  margin-top: 1.6rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;

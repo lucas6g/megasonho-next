@@ -33,9 +33,6 @@ export const Header = styled.header`
       display: none;
     }
   }
-  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-    margin-bottom: 3.6rem;
-  }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     .logo {

@@ -1,5 +1,6 @@
 import * as S from './AtractionCardStyles'
 import FutureImage from 'next/image'
+import { useRouter } from 'next/router'
 
 interface AtractionCardProps {
   name: string
@@ -7,6 +8,7 @@ interface AtractionCardProps {
 }
 
 export function AtractionCard(props: AtractionCardProps) {
+  const router = useRouter()
   return (
     <S.AtractionCard>
       <FutureImage
@@ -18,7 +20,11 @@ export function AtractionCard(props: AtractionCardProps) {
       />
       <div className="overlay">
         <span className="atraction-name">{props.name}</span>
-        <button>
+        <button
+          onClick={() => {
+            router.push('/register')
+          }}
+        >
           <span>Quero conhecer</span>
           <FutureImage
             src={'/icons/arrow-right-blue.svg'}

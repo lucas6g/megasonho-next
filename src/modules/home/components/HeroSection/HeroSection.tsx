@@ -29,7 +29,12 @@ export function HeroSection() {
   const router = useRouter()
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    router.push('/register')
+    router.push({
+      pathname: '/register',
+      query: {
+        phone: data.phone
+      }
+    })
   }
 
   return (
@@ -61,7 +66,12 @@ export function HeroSection() {
               Inscreva-se e concorra a viagem dos <br />
               seus sonhos para sua família e amigos.
             </h2>
-            <HeroSectionButton text="É totalmente grátis" />
+            <HeroSectionButton
+              onClick={() => {
+                router.push('/register')
+              }}
+              text="É totalmente grátis"
+            />
           </S.InfoCollun>
 
           <S.WhatsAppForm onSubmit={handleSubmit(onSubmit)}>

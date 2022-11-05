@@ -1,15 +1,10 @@
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { HeroSection } from '@/modules/home/components/HeroSection/HeroSection'
 import { HowIsEasySection } from '@/modules/home/components/HowIsEasySection/HowIsEasySection'
-const VideoSection = dynamic(
-  async () =>
-    await import('../modules/home/components/VideoSection/VideoSection'),
-  {
-    suspense: true
-  }
-)
+import VideoSection from '@/modules/home/components/VideoSection/VideoSection'
+
 const SectionFour = dynamic(
   async () =>
     await import('../modules/home/components/SectionFour/SectionFour'),
@@ -25,12 +20,19 @@ const Footer = dynamic(
 )
 
 const Home: NextPage = () => {
+  const [isRenderVideo, setIsRenderVideo] = useState(false)
+  useEffect(() => {
+    setIsRenderVideo(true)
+  }, [])
+
   return (
     <>
       <HeroSection />
       <HowIsEasySection />
+
+      {isRenderVideo && <VideoSection />}
+
       <Suspense>
-        <VideoSection />
         <SectionFour />
         <Footer />
       </Suspense>

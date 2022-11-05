@@ -6,9 +6,12 @@ import {
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
 import FutureImage from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { QuestionBox } from './QuestionBox/QuestionBox'
 import * as S from './SectionFourStyles'
 export default function SectionFour() {
+  const router = useRouter()
+
   return (
     <S.Container>
       <S.IsFreeContent>
@@ -17,7 +20,12 @@ export default function SectionFour() {
             Não fique de fora, increva-se <br />
             agora mesmo, <span> é grátis!</span>
           </h4>
-          <CTAButton text="Quero o meu número da sorte" />
+          <CTAButton
+            onClick={() => {
+              router.push('/register')
+            }}
+            text="Quero o meu número da sorte"
+          />
           <S.BePartYouTooBox>
             <FutureImage
               src={'/images/participants.svg'}

@@ -3,8 +3,10 @@ import Link from 'next/link'
 import FutureImage from 'next/image'
 import * as S from './FooterStyles'
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
+import { useRouter } from 'next/router'
 
 export default function Footer() {
+  const router = useRouter()
   return (
     <S.Container>
       <S.HeaderContainer>
@@ -21,6 +23,9 @@ export default function Footer() {
 
             <div>
               <CTAButton
+                onClick={() => {
+                  router.push('/register')
+                }}
                 className="button-desktop"
                 text="Concorra agora mesmo"
               />
@@ -50,7 +55,13 @@ export default function Footer() {
               </a>
             </div>
           </S.HeaderBox>
-          <CTAButton className="button-mobile" text="Concorra agora mesmo" />
+          <CTAButton
+            onClick={() => {
+              router.push('/register')
+            }}
+            className="button-mobile"
+            text="Concorra agora mesmo"
+          />
         </S.FooterHeader>
       </S.HeaderContainer>
 

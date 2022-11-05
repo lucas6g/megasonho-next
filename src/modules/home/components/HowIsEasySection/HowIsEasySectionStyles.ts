@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
-export const Container = styled.section``
+export const Container = styled.section`
+  margin-top: 6.4rem;
+`
 export const Content = styled.div`
   max-width: 120rem;
   padding: 0 1.6rem;
   margin: 0 auto;
-  margin-top: 6.4rem;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-top: 14rem;

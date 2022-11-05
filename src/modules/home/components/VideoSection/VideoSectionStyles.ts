@@ -4,6 +4,10 @@ export const Container = styled.section`
   margin-top: 6.4rem;
   height: 812px;
 
+  section {
+    height: 812px;
+  }
+
   div {
     position: absolute;
     height: 812px;
@@ -55,9 +59,13 @@ export const Container = styled.section`
     height: 100%;
     object-fit: cover;
   }
+
   @media (min-width: 1024px) {
     margin-top: 14rem;
     div {
+      height: 1000px;
+    }
+    section {
       height: 1000px;
     }
     height: 1000px;
