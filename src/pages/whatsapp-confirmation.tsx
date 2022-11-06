@@ -7,9 +7,13 @@ import { ImageBackground } from '@/shared/components/ImageBackground/ImageBackgr
 import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { Button } from '@/shared/components/Button/Button'
 
 const WhatsappConfirmation: NextPage = () => {
   const [token, setToken] = useState('')
+  const [code, setCode] = useState('')
+
+  const [buttonDisable, setButtonDisabled] = useState(true)
   const router = useRouter()
 
   const [
@@ -17,15 +21,15 @@ const WhatsappConfirmation: NextPage = () => {
     setWhatsConfirmationCodeErrorMessage
   ] = useState('')
 
-  useEffect(() => {
-    api
-      .post('/two-factor/create', {
-        two_factor_type: 'WHATSAPP'
-      })
-      .then((response) => {
-        setToken(response.data.token)
-      })
-  }, [])
+  // useEffect(() => {
+  //   api
+  //     .post('/two-factor/create', {
+  //       two_factor_type: 'WHATSAPP'
+  //     })
+  //     .then((response) => {
+  //       setToken(response.data.token)
+  //     })
+  // }, [])
 
   const [confirmationCodeError, setConfirmationCodeError] = useState(false)
 
@@ -35,11 +39,12 @@ const WhatsappConfirmation: NextPage = () => {
         setConfirmationCodeError(true)
         return
       }
-      setConfirmationCodeError(false)
-      await api.post('/two-factor/activate', {
-        code,
-        token
-      })
+      router.push('/lucky-number')
+
+      // await api.post('/two-factor/activate', {
+      //   code,
+      //   token
+      // })
     } catch (error: any) {
       setConfirmationCodeError(true)
       setWhatsConfirmationCodeErrorMessage(error.response.data.message)
@@ -102,7 +107,7 @@ const WhatsappConfirmation: NextPage = () => {
           </h1>
 
           <p>
-            Enviamos um codigo para o número <br /> +55 (88) 98888-1244. Informe
+            Enviamos um código para o número <br /> +55 (88) 98888-1244. Informe
             o código enviado:
           </p>
 
@@ -110,9 +115,15 @@ const WhatsappConfirmation: NextPage = () => {
             type="text"
             isErrored={confirmationCodeError}
             autoFocus
-            onCompleted={() => {
-              router.push('/lucky-number')
+            onChange={(code) => {
+              if (code.length === 6) {
+                setButtonDisabled(false)
+                setCode(code)
+              } else {
+                setButtonDisabled(true)
+              }
             }}
+            value={code}
             length={6}
             placeholder=""
           />
@@ -132,6 +143,16 @@ const WhatsappConfirmation: NextPage = () => {
             <button onClick={handleResend2FactorCode}>aqui</button> para o
             código ser reenviado.
           </span>
+          <Button
+            type="button"
+            className="send-code-button"
+            onClick={async () => {
+              await handleConfirmWhats(code)
+            }}
+            disabled={buttonDisable}
+          >
+            Enviar
+          </Button>
         </S.Form>
         <GradientLine />
       </S.FormContainer>

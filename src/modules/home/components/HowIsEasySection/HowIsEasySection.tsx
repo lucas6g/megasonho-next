@@ -2,7 +2,9 @@ import * as S from './HowIsEasySectionStyles'
 import FutureImage from 'next/image'
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
 import { AtractionCard } from '@/modules/home/components/HowIsEasySection/AtractionCard/AtractionCard'
+import { useRouter } from 'next/router'
 export function HowIsEasySection() {
+  const router = useRouter()
   return (
     <S.Container>
       <S.Content>
@@ -10,7 +12,7 @@ export function HowIsEasySection() {
           <S.SeeHowIsEasyColumn>
             <h3>Veja como é fácil!</h3>
             <p>
-              Realize o seu sonho da viagem para Disney nas próximas férias.
+              Realize o seu sonho de viajar para Disney nas próximas férias.
               Seja criança novamente, se emocione com o show de fogos.{' '}
               <strong>Faça o cadastro, é grátis!</strong>
             </p>
@@ -29,7 +31,12 @@ export function HowIsEasySection() {
                 <span>Concorra a uma viagem para a Disney</span>
               </S.StepsContent>
             </S.StepsBox>
-            <CTAButton text="Concorra agora mesmo" />
+            <CTAButton
+              onClick={() => {
+                router.push('/register')
+              }}
+              text="Concorra agora mesmo"
+            />
             <S.BePartYouTooBox>
               <FutureImage
                 src={'/images/participants.svg'}

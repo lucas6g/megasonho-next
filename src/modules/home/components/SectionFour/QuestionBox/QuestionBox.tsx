@@ -4,11 +4,16 @@ import { Question, Container, Response } from './QuestionBoxStyles'
 interface QuestionBoxProps {
   question: string
   response: string
+  hasBorder?: boolean
 }
 
-export function QuestionBox({ question, response }: QuestionBoxProps) {
+export function QuestionBox({
+  question,
+  response,
+  hasBorder = true
+}: QuestionBoxProps) {
   return (
-    <Container>
+    <Container hasBorder={hasBorder}>
       <Question>
         <strong>{question}</strong>
         <FutureImage
@@ -19,7 +24,7 @@ export function QuestionBox({ question, response }: QuestionBoxProps) {
         />
       </Question>
       <Response>
-        <p>{response}</p>
+        <p dangerouslySetInnerHTML={{ __html: response }} />
       </Response>
     </Container>
   )

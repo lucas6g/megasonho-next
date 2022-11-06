@@ -11,19 +11,25 @@ export const Container = styled.div`
 `
 
 export const FormContainer = styled.div`
-  padding: 1.6rem;
+  padding: 1.6rem 1.6rem 0 1.6rem;
   position: relative;
   background-position: 90%;
   background-size: cover;
-  height: auto;
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 16px;
 
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    overflow: auto;
+    padding-bottom: 0;
+  }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 0.8rem;
     background-image: unset !important;
     height: 100vh;
   }
-  @media (min-height: 800px) {
-    height: 100vh;
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
+    padding-left: 9.6rem;
   }
 `
 export const HeaderMobile = styled.div`
@@ -53,26 +59,23 @@ export const HeaderMobile = styled.div`
 `
 export const Form = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
-  padding: 2.4rem 1.6rem;
+  padding: 1.6rem;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
 
-  button {
-    margin-top: 2.4rem;
-  }
-
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 0;
+    padding-top: 4.8rem;
     max-width: 44.8rem;
-    padding-top: 2rem;
-    padding-bottom: 4px;
-  }
-`
-export const ProgressBarMobile = styled.div`
-  margin-bottom: 4.5rem;
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: none;
+    height: 100%;
+    gap: 4rem;
+
+    button {
+      margin-top: auto;
+      margin-bottom: 46px;
+    }
   }
 `
 
@@ -82,13 +85,18 @@ export const ProgresseBarDesk = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
     justify-content: flex-end;
+    height: 4rem;
 
     button {
       border: none;
       background: transparent;
-      height: 3.2rem;
-      width: 3.2rem;
+      height: 4rem;
+      width: 4rem;
       border-radius: 50%;
+      img {
+        height: 4rem;
+        width: 4rem;
+      }
     }
   }
 `
@@ -121,6 +129,9 @@ export const TermsCheckBox = styled.div`
       width: 100%;
     }
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    margin-top: 8px;
+  }
 `
 
 interface CheckBoxProps {
@@ -143,8 +154,8 @@ export const CheckBox = styled.input<CheckBoxProps>`
     `};
 
   &:checked {
-    border-color: ${({ theme }) => theme.colors.green};
-    background-color: ${({ theme }) => theme.colors.green};
+    border-color: ${({ theme }) => theme.colors.blue};
+    background-color: ${({ theme }) => theme.colors.blue};
     background-image: url('/icons/check-white.svg');
     background-repeat: no-repeat;
   }

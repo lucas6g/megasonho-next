@@ -41,12 +41,18 @@ export const PlansContainer = styled.div`
   background-position: 90%;
   background-size: cover;
 
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 0.8rem;
     background-image: unset !important;
     height: 100vh;
   }
-  @media (min-height: 600px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
+    padding-left: 9.6rem;
   }
 `
 export const HeaderMobile = styled.div`
@@ -79,6 +85,9 @@ export const PlansContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 16px;
   border-radius: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     text-align: left;
@@ -95,11 +104,13 @@ export const PlansContent = styled.div`
     line-height: 25px;
     color: ${({ theme }) => theme.colors.darkBlue};
     margin-top: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   @media (min-width: 1024px) {
     max-width: 448px;
+    padding: 0;
+    padding-top: 4.8rem;
   }
 `
 

@@ -23,14 +23,17 @@ export const FormContainer = styled.div`
   background-position: 60%;
   background-size: cover;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 0.8rem;
     background-image: unset !important;
     height: 100vh;
   }
-  @media (min-height: 800px) {
-    height: 100vh;
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
+    padding-left: 9.6rem;
   }
 `
 export const HeaderMobile = styled.div`
@@ -69,14 +72,19 @@ export const ProgresseBarDesk = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
     justify-content: flex-end;
+    height: 4rem;
     margin-bottom: 48px;
 
     button {
       border: none;
       background: transparent;
-      height: 3.2rem;
-      width: 3.2rem;
+      height: 4rem;
+      width: 4rem;
       border-radius: 50%;
+      img {
+        height: 4rem;
+        width: 4rem;
+      }
     }
   }
 `
@@ -85,13 +93,17 @@ export const Form = styled.form<FormPros>`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 1.6rem;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  .send-code-button {
+    margin-top: 72px;
+  }
 
   h1 {
     text-align: left;
     font-weight: 700;
     font-size: 2.2rem;
     line-height: 2.8rem;
-
     color: ${({ theme }) => theme.colors.darkBlue};
 
     img {
@@ -157,20 +169,24 @@ export const Form = styled.form<FormPros>`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 3.11956px;
+    border-radius: 4px;
     background-color: ${({ theme }) => theme.colors.gray};
-    border: 1px solid rgba(0, 0, 0, 0.1);
+
     ${props =>
       props.isError &&
       css`
         border: 2px solid red;
       `};
   }
+
   @media (min-width: 1024px) {
     .ReactInputVerificationCode__container {
       max-width: 368px;
     }
+    padding: 0;
+    padding-top: 4.8rem;
     max-width: 448px;
+    height: 100%;
 
     h1 {
       font-size: 3.2rem;
@@ -178,6 +194,16 @@ export const Form = styled.form<FormPros>`
     }
     span {
       white-space: nowrap;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    height: 100%;
+    padding-top: 4.8rem;
+
+    button {
+      margin-top: auto;
+      margin-bottom: 46px;
     }
   }
 `

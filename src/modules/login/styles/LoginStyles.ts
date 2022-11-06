@@ -7,6 +7,7 @@ export const Container = styled.div`
   .login-back {
     width: 100%;
     object-fit: cover;
+    object-position: 20%;
   }
 `
 export const Wrapper = styled.div`
@@ -33,6 +34,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     justify-content: flex-end;
@@ -63,7 +65,6 @@ export const LogoDesktop = styled.div`
   display: none;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: block;
-    margin-top: 6.4rem;
 
     a {
       img {
@@ -81,17 +82,15 @@ export const LoginForm = styled.form`
   padding: 4rem 1.6rem;
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
-
-  p {
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    color: ${({ theme }) => theme.colors.darkBlue};
-    opacity: 0.6;
-    margin: 0.8rem 0;
+  .gap {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
+
   .forgot-password {
+    margin-top: 16px;
+    margin-bottom: 40px;
     background: transparent;
     border: none;
     text-decoration: none;
@@ -121,4 +120,5 @@ export const LoginFormTitle = styled.h1`
   font-weight: 700;
   font-size: 2.4rem;
   color: ${({ theme }) => theme.colors.darkBlue};
+  margin-bottom: 24px;
 `

@@ -1,18 +1,11 @@
 import styled from 'styled-components'
 
 export const Container = styled.main`
-  position: relative;
   .hero-back {
     width: 100%;
     object-fit: cover;
     object-position: 25%;
-    height: 650px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    .hero-back {
-      height: 824px;
-    }
+    min-height: 100vh;
   }
 `
 export const Wrapper = styled.div`
@@ -24,6 +17,13 @@ export const Wrapper = styled.div`
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    bottom: 0;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
+  }
 `
 
 export const SectionContent = styled.div`
@@ -106,7 +106,7 @@ export const InfoCollun = styled.div`
 `
 
 export const WhatsAppForm = styled.form`
-  height: 26.4rem;
+  height: 20.4rem;
   background-color: ${({ theme }) => theme.colors.white};
   padding: 1.6rem;
   border-radius: 1.6rem;
@@ -117,11 +117,11 @@ export const WhatsAppForm = styled.form`
     line-height: 2.5rem;
     color: ${({ theme }) => theme.colors.darkBlue};
     text-align: left;
-    margin-bottom: 2.4rem;
+    margin-bottom: 1.6rem;
   }
 
   button {
-    margin-top: 4.8rem;
+    margin-top: 2.4rem;
   }
   @media (min-width: 425px) {
     h3 {
@@ -130,13 +130,23 @@ export const WhatsAppForm = styled.form`
       }
     }
   }
+
+  @media (min-width: 321px) {
+    height: 26.4rem;
+    h3 {
+      margin-bottom: 2.4rem;
+    }
+    button {
+      margin-top: 4.8rem;
+    }
+  }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     max-width: 31.3rem;
   }
 `
 
 export const CertificationContainer = styled.div`
-  margin-top: 2.4rem;
+  margin-top: 1.6rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -167,6 +177,7 @@ export const CertificationContainer = styled.div`
     }
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-top: 12.8rem;
+    position: absolute;
+    bottom: 88px;
   }
 `

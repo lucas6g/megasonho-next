@@ -8,6 +8,7 @@ export const Container = styled.div`
     position: absolute;
     font-weight: 500;
     font-size: 1.4rem;
+    margin-top: 4px;
     color: ${({ theme }) => theme.colors.red};
   }
 `

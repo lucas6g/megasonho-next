@@ -15,14 +15,19 @@ export const LuckyNumberContainer = styled.div`
   position: relative;
   background-position: 90%;
   background-size: cover;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 0.8rem;
     background-image: unset !important;
     height: 100vh;
   }
-  @media (min-height: 600px) {
-    height: 100vh;
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
+    padding-left: 9.6rem;
   }
 `
 export const HeaderMobile = styled.div`
@@ -57,22 +62,32 @@ export const ProgresseBarDesk = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
     justify-content: flex-end;
-    height: 32px;
+    height: 4rem;
+    margin-bottom: 48px;
 
     button {
       border: none;
       background: transparent;
-      height: 3.2rem;
-      width: 3.2rem;
+      height: 4rem;
+      width: 4rem;
       border-radius: 50%;
+      img {
+        height: 4rem;
+        width: 4rem;
+      }
     }
   }
 `
-
 export const LuckyNumberForm = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
-  padding: 16px 16px;
+  padding: 16px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+
+  .get-more-button {
+    margin-top: 72px;
+  }
 
   h1 {
     text-align: left;
@@ -80,6 +95,7 @@ export const LuckyNumberForm = styled.form`
     font-size: 28px;
     line-height: 38px;
     color: ${({ theme }) => theme.colors.darkBlue};
+    margin-bottom: 16px;
     br {
       display: none;
     }
@@ -114,17 +130,21 @@ export const LuckyNumberForm = styled.form`
     }
   }
 
-  .get-more-button {
-    margin-top: 48px;
-  }
-
   @media (min-width: 1024px) {
+    height: 100%;
+    .get-more-button {
+      margin-top: auto;
+      margin-bottom: 46px;
+    }
+    padding: 0;
+    padding-top: 4.8rem;
+    max-width: 448px;
+
     h1 {
       br {
         display: block;
       }
     }
-    max-width: 465px;
   }
 `
 

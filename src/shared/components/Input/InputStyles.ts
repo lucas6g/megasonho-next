@@ -7,6 +7,7 @@ export const Container = styled.div`
     font-weight: 500;
     font-size: 1.4rem;
     color: ${({ theme }) => theme.colors.red};
+    margin-top: 4px;
   }
 `
 
@@ -46,6 +47,7 @@ export const InputBlock = styled.div<InputBlockProps>`
     font-weight: 600;
     font-size: 1.4rem;
     color: ${({ theme }) => theme.colors.darkBlue};
+    margin-bottom: 4px;
   }
 `
 interface StyledInputProps {

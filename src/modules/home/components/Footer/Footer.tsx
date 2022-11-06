@@ -3,8 +3,10 @@ import Link from 'next/link'
 import FutureImage from 'next/image'
 import * as S from './FooterStyles'
 import { CTAButton } from '@/shared/components/CTAButton/CTAButton'
+import { useRouter } from 'next/router'
 
 export default function Footer() {
+  const router = useRouter()
   return (
     <S.Container>
       <S.HeaderContainer>
@@ -21,6 +23,9 @@ export default function Footer() {
 
             <div>
               <CTAButton
+                onClick={() => {
+                  router.push('/register')
+                }}
                 className="button-desktop"
                 text="Concorra agora mesmo"
               />
@@ -50,7 +55,13 @@ export default function Footer() {
               </a>
             </div>
           </S.HeaderBox>
-          <CTAButton className="button-mobile" text="Concorra agora mesmo" />
+          <CTAButton
+            onClick={() => {
+              router.push('/register')
+            }}
+            className="button-mobile"
+            text="Concorra agora mesmo"
+          />
         </S.FooterHeader>
       </S.HeaderContainer>
 
@@ -69,10 +80,10 @@ export default function Footer() {
                 Certificado de Autorização
               </S.CertificationTitle>
               <p>
-                O sorteio da viagem para a Walt Disney World da MEGASONHO,
-                cumpre todos os requisitos legais junto ao Governo Federal e
-                possui certificado de autorização emitido pela SEAE - Secretaria
-                de Advocacia da Concorrência e Competitividade, Planejamento,
+                O sorteio da viagem para a Walt Disney World da MEGASONHO cumpre
+                todos os requisitos legais junto ao Governo Federal e possui
+                certificado de autorização emitido pela SEAE - Secretaria de
+                Advocacia da Concorrência e Competitividade, Planejamento,
                 Energia e Loteria sob o <br /> certificado nº 00.00000/0000.
               </p>
               <S.VirifiedBox>
@@ -107,7 +118,7 @@ export default function Footer() {
           <p>
             <strong>MEGASONHO®</strong> é uma marca registrada e licenciada pela
             Treasury Bonds Plus, LLC. Somos uma empresa de tecnologia que atua
-            nos setores do turismos e financeiro. Nosso propósito é dar a vida e
+            nos setores do turismo e financeiro. Nosso propósito é dar a vida e
             realizar o sonho do brasileiro fazer a viagem para Walt Disney
             World.
           </p>

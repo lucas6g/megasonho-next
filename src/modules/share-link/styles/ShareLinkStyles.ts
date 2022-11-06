@@ -16,14 +16,18 @@ export const ShareLinkContainer = styled.div`
   background-position: 60%;
   background-size: cover;
   height: 100%;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 0.8rem;
     background-image: unset !important;
     height: 100vh;
   }
-  @media (min-height: 600px) {
-    height: 100vh;
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding: 0;
+    padding-left: 9.6rem;
   }
 `
 export const HeaderMobile = styled.div`
@@ -56,6 +60,11 @@ export const ShareLinkContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 16px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  .continue {
+    margin-top: 72px;
+  }
 
   h1 {
     text-align: left;
@@ -76,10 +85,6 @@ export const ShareLinkContent = styled.div`
     opacity: 0.9;
   }
 
-  .continue {
-    margin-top: 32px;
-  }
-
   span.text {
     text-align: left;
     font-weight: 400;
@@ -92,7 +97,15 @@ export const ShareLinkContent = styled.div`
 
   @media (min-width: 1024px) {
     max-width: 448px;
+    padding: 0;
+    height: 100%;
+    padding-top: 4.8rem;
+    .continue {
+      margin-bottom: 46px;
+      margin-top: auto;
+    }
   }
+
   @media (min-width: 768px) {
     h1 {
       font-size: 40px;

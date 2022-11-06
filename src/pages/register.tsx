@@ -5,7 +5,7 @@ import * as S from '@/modules/register/styles/RegisterStyles'
 import { Button } from '@/shared/components/Button/Button'
 import { ImageBackground } from '@/shared/components/ImageBackground/ImageBackground'
 import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PhoneInput } from '@/shared/components/PhoneInput/PhoneInput'
 import pt from 'react-phone-input-2/lang/pt.json'
 import { getRegisterPageValidationScemma } from '@/modules/register/validation/getRegisterPageValidationScemma'
@@ -25,15 +25,33 @@ interface FormData {
 
 const Register: NextPage = () => {
   const [countryCode, setCountryCode] = useState('BR')
+  const router = useRouter()
+
+  const [isPhoneInputFiled, setIsPhoneInputFiled] = useState(false)
   const [isSelectingCountryCode, selectCoutryCode] = useState(true)
-  const { register, handleSubmit, formState, getFieldState, control } =
-    useForm<FormData>({
-      resolver: yupResolver(getRegisterPageValidationScemma(countryCode)),
-      defaultValues: {
-        acceptTerms: true
-      },
-      mode: 'all'
-    })
+  const {
+    register,
+    handleSubmit,
+    formState,
+    getFieldState,
+    control,
+    setValue
+  } = useForm<FormData>({
+    resolver: yupResolver(getRegisterPageValidationScemma(countryCode)),
+    defaultValues: {
+      acceptTerms: true
+    },
+    mode: 'all'
+  })
+
+  useEffect(() => {
+    const phone = String(router.query.phone)
+    if (phone !== 'undefined') {
+      setIsPhoneInputFiled(true)
+      setValue('phone', phone, { shouldDirty: true })
+    }
+  }, [])
+
   const nameState = getFieldState('name', formState)
   const phoneState = getFieldState('phone', formState)
   const emailState = getFieldState('email', formState)
@@ -43,7 +61,6 @@ const Register: NextPage = () => {
     formState
   )
 
-  const router = useRouter()
   async function handleRegisterParticipant(values: FormData) {
     router.push('/whatsapp-confirmation')
   }
@@ -103,6 +120,7 @@ const Register: NextPage = () => {
               defaultValue=""
               render={({ field }) => (
                 <PhoneInput
+                  disableDropdown={isPhoneInputFiled}
                   isCorrect={!formState.errors.phone && phoneState.isDirty}
                   error={formState.errors.phone}
                   dropdownClass="input-phone-dropdown"
@@ -116,7 +134,9 @@ const Register: NextPage = () => {
                     id: 'phone',
                     onBlur: field.onBlur,
                     ref: field.ref,
-                    ...(isSelectingCountryCode && { value: field.value })
+                    name: field.name,
+                    ...(isSelectingCountryCode && { value: field.value }),
+                    readOnly: isPhoneInputFiled
                   }}
                   value={field.value}
                   onChange={(value, data: any, event, formattedValue) => {
@@ -184,7 +204,7 @@ const Register: NextPage = () => {
               </span>
             </S.TermsCheckBox>
 
-            <Button type="submit">
+            <Button disabled={!formState.isValid} type="submit">
               <span>Enviar</span>
             </Button>
           </S.Form>

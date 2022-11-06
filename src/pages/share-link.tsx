@@ -73,8 +73,8 @@ const ShareLink: NextPage = () => {
           <h1>Aumente as suas chances 😍🎢</h1>
 
           <p>
-            Esse é o seu link compartilhamento, cada pessoa que utilizar você
-            ganha mais pontos!
+            Esse é o seu link de compartilhamento, cada pessoa que utilizar fará
+            você ganhar mais pontos!
           </p>
 
           <S.LinkBox>
@@ -99,8 +99,8 @@ const ShareLink: NextPage = () => {
           </S.LinkBox>
 
           <span className="text">
-            Lembre-se você só ganha pontos se quem usar seu link, concluir o
-            cadastro.
+            Lembre-se que você só ganhará pontos se quem utilizar o seu link,
+            concluir o cadastro.
           </span>
 
           <Button

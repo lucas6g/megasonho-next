@@ -10,7 +10,7 @@ export function getRegisterPageValidationScemma (countryCode: string) {
 
     phone: yup
       .string()
-      .phone(countryCode.toUpperCase(), undefined, 'Digita um numero certo')
+      .phone(countryCode.toUpperCase(), undefined, 'Digite um número correto')
       .required('O campo celular é obrigátorio'),
 
     email: yup
@@ -22,7 +22,7 @@ export function getRegisterPageValidationScemma (countryCode: string) {
     passwordConfirmation: yup
       .string()
       .oneOf([yup.ref('password'), undefined], 'As senhas não conencidem')
-      .required('Ta faltalndo esse'),
+      .required('Confirme sua senha'),
 
     acceptTerms: yup.bool().oneOf([true])
   })
