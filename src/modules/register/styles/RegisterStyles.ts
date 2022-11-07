@@ -32,6 +32,28 @@ export const FormContainer = styled.div`
     padding-left: 9.6rem;
   }
 `
+export const HeaderDeskTop = styled.div`
+  display: none;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: flex;
+    justify-content: flex-end;
+    height: 4rem;
+
+    button {
+      border: none;
+      background: transparent;
+      height: 4rem;
+      width: 4rem;
+      border-radius: 50%;
+      img {
+        height: 4rem;
+        width: 4rem;
+      }
+    }
+  }
+`
+
 export const HeaderMobile = styled.div`
   display: flex;
   justify-content: space-between;
@@ -72,34 +94,13 @@ export const Form = styled.form`
     height: 100%;
     gap: 4rem;
 
-    button {
+    .register-btn {
       margin-top: auto;
       margin-bottom: 46px;
     }
   }
 `
 
-export const ProgresseBarDesk = styled.div`
-  display: none;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: flex;
-    justify-content: flex-end;
-    height: 4rem;
-
-    button {
-      border: none;
-      background: transparent;
-      height: 4rem;
-      width: 4rem;
-      border-radius: 50%;
-      img {
-        height: 4rem;
-        width: 4rem;
-      }
-    }
-  }
-`
 export const TermsCheckBox = styled.div`
   display: flex;
   gap: 1rem;

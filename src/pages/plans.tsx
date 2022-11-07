@@ -8,6 +8,7 @@ import { priceFormater } from '@/shared/utils/priceFormater'
 import { NextPage } from 'next'
 import Image from 'next/image'
 import { HeaderPainel } from '@/shared/components/HeaderPainel/HeaderPainel'
+import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
 
 interface Plan {
   uuid: string
@@ -161,23 +162,7 @@ const Plans: NextPage = () => {
           backgroundImage: `url(${'/images/plans-back.jpg'})`
         }}
       >
-        <S.HeaderMobile>
-          <Image
-            src={'/icons/logo.svg'}
-            alt="Imagem de fundo"
-            width={345}
-            height={50}
-            id="logo-white"
-          />
-          <button type="button">
-            <Image
-              src={'/icons/close.svg'}
-              alt="Icone de fechar"
-              width={32}
-              height={32}
-            />
-          </button>
-        </S.HeaderMobile>
+        <HeaderMobile />
         <S.PlansContent>
           <HeaderPainel nameInitialLetter="L" />
           <h1>Aqui será um título em destaque ⏱</h1>

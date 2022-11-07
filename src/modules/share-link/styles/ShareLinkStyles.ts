@@ -30,31 +30,6 @@ export const ShareLinkContainer = styled.div`
     padding-left: 9.6rem;
   }
 `
-export const HeaderMobile = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.6rem;
-
-  #close-icon {
-    height: 3.2rem;
-    width: 3.2rem;
-  }
-  button {
-    border: none;
-    background: transparent;
-  }
-
-  #logo-white {
-    max-width: 17.6rem;
-    width: 100%;
-    height: 2.4rem;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: none;
-  }
-`
 
 export const ShareLinkContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};

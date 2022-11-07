@@ -30,54 +30,7 @@ export const LuckyNumberContainer = styled.div`
     padding-left: 9.6rem;
   }
 `
-export const HeaderMobile = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.6rem;
 
-  #close-icon {
-    height: 3.2rem;
-    width: 3.2rem;
-  }
-  button {
-    border: none;
-    background: transparent;
-  }
-
-  #logo-white {
-    max-width: 17.6rem;
-    width: 100%;
-    height: 2.4rem;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: none;
-  }
-`
-
-export const ProgresseBarDesk = styled.div`
-  display: none;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: flex;
-    justify-content: flex-end;
-    height: 4rem;
-    margin-bottom: 48px;
-
-    button {
-      border: none;
-      background: transparent;
-      height: 4rem;
-      width: 4rem;
-      border-radius: 50%;
-      img {
-        height: 4rem;
-        width: 4rem;
-      }
-    }
-  }
-`
 export const LuckyNumberForm = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 16px;

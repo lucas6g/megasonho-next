@@ -8,6 +8,8 @@ import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { Button } from '@/shared/components/Button/Button'
+import { HeaderPainel } from '@/shared/components/HeaderPainel/HeaderPainel'
+import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
 
 const WhatsappConfirmation: NextPage = () => {
   const [token, setToken] = useState('')
@@ -68,34 +70,8 @@ const WhatsappConfirmation: NextPage = () => {
           backgroundImage: `url(/images/back-whats.jpg)`
         }}
       >
-        <S.HeaderMobile>
-          <Image
-            src={'/icons/logo.svg'}
-            alt="Imagem de fundo"
-            width={345}
-            height={50}
-            id="logo-white"
-          />
-          <button type="button">
-            <Image
-              src={'/icons/close.svg'}
-              alt="Icone de fechar"
-              width={32}
-              height={32}
-            />
-          </button>
-        </S.HeaderMobile>
+        <HeaderMobile />
         <S.Form isError={confirmationCodeError}>
-          <S.ProgresseBarDesk>
-            <button type="button">
-              <Image
-                src={'/icons/close.svg'}
-                alt="Icone de fechar"
-                width={32}
-                height={32}
-              />
-            </button>
-          </S.ProgresseBarDesk>
           <h1>
             Te enviamos um código via Whatsapp{' '}
             <Image

@@ -9,6 +9,7 @@ import api from '@/shared/services/api'
 import { NextPage } from 'next'
 import { HeaderPainel } from '@/shared/components/HeaderPainel/HeaderPainel'
 import { useRouter } from 'next/router'
+import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
 
 const ShareLink: NextPage = () => {
   let baseUrl = ''
@@ -50,23 +51,7 @@ const ShareLink: NextPage = () => {
           backgroundImage: `url(/images/back-whats.jpg)`
         }}
       >
-        <S.HeaderMobile>
-          <Image
-            src={'/icons/logo.svg'}
-            alt="Imagem de fundo"
-            width={345}
-            height={50}
-            id="logo-white"
-          />
-          <button type="button">
-            <Image
-              src={'/icons/close.svg'}
-              alt="Icone de fechar"
-              width={32}
-              height={32}
-            />
-          </button>
-        </S.HeaderMobile>
+        <HeaderMobile />
 
         <S.ShareLinkContent>
           <HeaderPainel nameInitialLetter="L" />

@@ -12,6 +12,7 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { MaskedInput } from '@/shared/components/MaskedInput/MaskedInput'
 import { useRouter } from 'next/router'
+import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
 interface FormData {
   document: string
 }
@@ -70,34 +71,8 @@ const LuckyNumber: NextPage = () => {
           backgroundImage: `url(/images/back-luck-number.jpg)`
         }}
       >
-        <S.HeaderMobile>
-          <Image
-            src={'/icons/logo.svg'}
-            alt="Imagem de fundo"
-            width={345}
-            height={50}
-            id="logo-white"
-          />
-          <button type="button">
-            <Image
-              src={'/icons/close.svg'}
-              alt="Icone de fechar"
-              width={32}
-              height={32}
-            />
-          </button>
-        </S.HeaderMobile>
+        <HeaderMobile />
         <S.LuckyNumberForm onSubmit={handleSubmit(handleValidateLuckyNumber)}>
-          <S.ProgresseBarDesk>
-            <button type="button">
-              <Image
-                src={'/icons/close.svg'}
-                alt="Icone de fechar"
-                width={32}
-                height={32}
-              />
-            </button>
-          </S.ProgresseBarDesk>
           <h1>
             A sua sorte está nos <br /> números 🎉
           </h1>

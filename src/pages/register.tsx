@@ -92,9 +92,15 @@ const Register: NextPage = () => {
               />
             </button>
           </S.HeaderMobile>
+
           <S.Form onSubmit={handleSubmit(handleRegisterParticipant)}>
-            <S.ProgresseBarDesk>
-              <button type="button">
+            <S.HeaderDeskTop>
+              <button
+                onClick={() => {
+                  router.push('/')
+                }}
+                type="button"
+              >
                 <Image
                   src={'/icons/close.svg'}
                   alt="Icone de fechar"
@@ -102,7 +108,7 @@ const Register: NextPage = () => {
                   height={32}
                 />
               </button>
-            </S.ProgresseBarDesk>
+            </S.HeaderDeskTop>
 
             <Input
               register={register}
@@ -204,7 +210,11 @@ const Register: NextPage = () => {
               </span>
             </S.TermsCheckBox>
 
-            <Button disabled={!formState.isValid} type="submit">
+            <Button
+              className="register-btn"
+              disabled={!formState.isValid}
+              type="submit"
+            >
               <span>Enviar</span>
             </Button>
           </S.Form>

@@ -69,8 +69,11 @@ export default function Footer() {
         <S.CertificateContent>
           <S.LinksBlock>
             <S.LinksBlockTitle>Saiba mais</S.LinksBlockTitle>
-            <FooterLink linkText="Quem somos" href="/about-us" />
-            <FooterLink linkText="Nossas políticas" href="/" />
+            <FooterLink linkText="Quem Somos" href="/about-us" />
+            <FooterLink linkText="Para Empresas" href="/about-us" />
+            <FooterLink linkText="Para Influencer" href="/about-us" />
+            <FooterLink linkText="Seja Franqueado" href="/about-us" />
+            <FooterLink linkText="Nossas Políticas" href="/" />
             <FooterLink linkText="Contato" href="/" />
           </S.LinksBlock>
 

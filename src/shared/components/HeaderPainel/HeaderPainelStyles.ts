@@ -4,7 +4,8 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  height: 40px;
+  margin-bottom: 4.8rem;
 
   div {
     display: flex;

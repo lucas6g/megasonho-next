@@ -37,19 +37,7 @@ export const FormContainer = styled.div`
   }
 `
 export const HeaderMobile = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 1.6rem;
-
-  #close-icon {
-    height: 3.2rem;
-    width: 3.2rem;
-  }
-  button {
-    border: none;
-    background: transparent;
-  }
 
   #logo-white {
     max-width: 17.6rem;
@@ -65,29 +53,6 @@ export const HeaderMobile = styled.div`
 interface FormPros {
   isError: boolean
 }
-
-export const ProgresseBarDesk = styled.div`
-  display: none;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: flex;
-    justify-content: flex-end;
-    height: 4rem;
-    margin-bottom: 48px;
-
-    button {
-      border: none;
-      background: transparent;
-      height: 4rem;
-      width: 4rem;
-      border-radius: 50%;
-      img {
-        height: 4rem;
-        width: 4rem;
-      }
-    }
-  }
-`
 
 export const Form = styled.form<FormPros>`
   background-color: ${({ theme }) => theme.colors.white};
@@ -188,22 +153,17 @@ export const Form = styled.form<FormPros>`
     max-width: 448px;
     height: 100%;
 
+    .send-code-button {
+      margin-top: auto;
+      margin-bottom: 46px;
+    }
+
     h1 {
       font-size: 3.2rem;
       line-height: 4rem;
     }
     span {
       white-space: nowrap;
-    }
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: 100%;
-    padding-top: 4.8rem;
-
-    button {
-      margin-top: auto;
-      margin-bottom: 46px;
     }
   }
 `
