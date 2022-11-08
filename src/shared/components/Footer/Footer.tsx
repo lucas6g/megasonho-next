@@ -74,7 +74,7 @@ export default function Footer() {
             <FooterLink linkText="Para Influencer" href="/about-us" />
             <FooterLink linkText="Seja Franqueado" href="/about-us" />
             <FooterLink linkText="Nossas Políticas" href="/" />
-            <FooterLink linkText="Contato" href="/" />
+            <FooterLink linkText="Contato" href="/contact" />
           </S.LinksBlock>
 
           <S.CertificateBox>
