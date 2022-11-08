@@ -6,39 +6,74 @@ import pt from 'react-phone-input-2/lang/pt.json'
 import * as S from '@/modules/login/styles/LoginStyles'
 import { PhoneInput } from '@/shared/components/PhoneInput/PhoneInput'
 import { Button } from '@/shared/components/Button/Button'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { Input } from '@/shared/components/Input/Input'
 import 'yup-phone'
 import { useRouter } from 'next/router'
+import { AuthContext } from '@/shared/context/AuthContext'
 interface IFormInput {
   phone: string
   password: string
 }
 const Login: NextPage = () => {
   const router = useRouter()
+  const { login } = useContext(AuthContext)
+  const [dialCode, setDialCode] = useState(0)
+  const [isLoading, setLoading] = useState(false)
   const [isSelectingCountryCode, selectCoutryCode] = useState(true)
   const [countryCode, setCountryCode] = useState('BR')
   const formSchema = yup.object().shape({
     phone: yup
       .string()
-      .phone(countryCode.toUpperCase(), undefined, 'Digita um numero certo')
+      .phone(countryCode.toUpperCase(), undefined, 'Digite um número correto')
       .required(),
     password: yup.string().required('Senha obrigátoria')
   })
 
-  const { control, handleSubmit, register, formState, getFieldState } =
-    useForm<IFormInput>({
-      resolver: yupResolver(formSchema),
-      mode: 'all'
-    })
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState,
+    getFieldState,
+    setError
+  } = useForm<IFormInput>({
+    resolver: yupResolver(formSchema),
+    mode: 'all'
+  })
 
   const phoneState = getFieldState('phone', formState)
   const passowordState = getFieldState('password', formState)
 
-  const loginSubmit: SubmitHandler<IFormInput> = (data) => {
-    router.push('/plans')
+  const loginSubmit: SubmitHandler<IFormInput> = async (data) => {
+    try {
+      setLoading(true)
+      await login({
+        phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`,
+        password: data.password
+      })
+      router.push('/plans')
+    } catch (error: any) {
+      console.log(error)
+      const field = error.response.data.payload.field
+      const message = error.response.data.payload.msg
+      switch (field) {
+        case 'phone':
+          setError('phone', {
+            message
+          })
+          break
+        case 'password':
+          setError('password', {
+            message
+          })
+          break
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -131,6 +166,7 @@ const Login: NextPage = () => {
                       }}
                       value={field.value}
                       onChange={(value, data: any, event, formattedValue) => {
+                        setDialCode(data.dialCode)
                         setCountryCode(data.countryCode.toUpperCase())
                         if (value === data.dialCode) {
                           field.onChange('')
@@ -163,7 +199,7 @@ const Login: NextPage = () => {
               <button type="button" className="forgot-password">
                 Esqueci minha senha
               </button>
-              <Button type="submit">
+              <Button isLoading={isLoading} type="submit">
                 <span> Entrar</span>
               </Button>
             </S.LoginForm>

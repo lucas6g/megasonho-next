@@ -5,7 +5,7 @@ import * as S from '@/modules/register/styles/RegisterStyles'
 import { Button } from '@/shared/components/Button/Button'
 import { ImageBackground } from '@/shared/components/ImageBackground/ImageBackground'
 import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { PhoneInput } from '@/shared/components/PhoneInput/PhoneInput'
 import pt from 'react-phone-input-2/lang/pt.json'
 import { getRegisterPageValidationScemma } from '@/modules/register/validation/getRegisterPageValidationScemma'
@@ -13,6 +13,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { AuthContext } from '@/shared/context/AuthContext'
 
 interface FormData {
   name: string
@@ -26,16 +27,20 @@ interface FormData {
 const Register: NextPage = () => {
   const [countryCode, setCountryCode] = useState('BR')
   const router = useRouter()
-
+  const { registerUser } = useContext(AuthContext)
+  const [isLoading, setLoading] = useState(false)
   const [isPhoneInputFiled, setIsPhoneInputFiled] = useState(false)
   const [isSelectingCountryCode, selectCoutryCode] = useState(true)
+  const [dialCode, setDialCode] = useState(0)
+  const phone = String(router.query.phone)
   const {
     register,
     handleSubmit,
     formState,
     getFieldState,
     control,
-    setValue
+    setValue,
+    setError
   } = useForm<FormData>({
     resolver: yupResolver(getRegisterPageValidationScemma(countryCode)),
     defaultValues: {
@@ -43,15 +48,6 @@ const Register: NextPage = () => {
     },
     mode: 'all'
   })
-
-  useEffect(() => {
-    const phone = String(router.query.phone)
-    if (phone !== 'undefined') {
-      setIsPhoneInputFiled(true)
-      setValue('phone', phone, { shouldDirty: true })
-    }
-  }, [])
-
   const nameState = getFieldState('name', formState)
   const phoneState = getFieldState('phone', formState)
   const emailState = getFieldState('email', formState)
@@ -61,8 +57,40 @@ const Register: NextPage = () => {
     formState
   )
 
-  async function handleRegisterParticipant(values: FormData) {
-    router.push('/whatsapp-confirmation')
+  useEffect(() => {
+    if (phone !== 'undefined') {
+      setIsPhoneInputFiled(true)
+      setValue('phone', phone, { shouldDirty: true })
+    }
+  }, [phone])
+
+  async function handleRegisterParticipant(data: FormData) {
+    try {
+      setLoading(true)
+      await registerUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`
+      })
+    } catch (error: any) {
+      const field = error.response.data.payload.field
+      const message = error.response.data.payload.msg
+      switch (field) {
+        case 'phone':
+          setError('phone', {
+            message
+          })
+          break
+        case 'email':
+          setError('email', {
+            message
+          })
+          break
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -147,6 +175,7 @@ const Register: NextPage = () => {
                   value={field.value}
                   onChange={(value, data: any, event, formattedValue) => {
                     setCountryCode(data.countryCode.toUpperCase())
+                    setDialCode(data.dialCode)
                     if (value === data.dialCode) {
                       field.onChange('')
                       selectCoutryCode(true)
@@ -211,6 +240,7 @@ const Register: NextPage = () => {
             </S.TermsCheckBox>
 
             <Button
+              isLoading={isLoading}
               className="register-btn"
               disabled={!formState.isValid}
               type="submit"

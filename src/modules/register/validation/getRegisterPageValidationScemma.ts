@@ -6,7 +6,11 @@ export function getRegisterPageValidationScemma (countryCode: string) {
     name: yup
       .string()
       .required('O campo nome é obrigátorio.')
-      .matches(/^[A-zÀ-ú\s]+$/, 'Digite apenas seu nome.'),
+      .matches(/^[A-zÀ-ú\s]+$/, 'Digite apenas seu nome.')
+      .test('is-full-name', 'Digite seu nome completo', (inputValue: any) => {
+        const name = inputValue?.split(' ')
+        return !!name[1]
+      }),
 
     phone: yup
       .string()

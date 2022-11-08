@@ -10,31 +10,47 @@ import { validatePhone } from '@/shared/validation/phoneValidationScema'
 import { Header } from '@/modules/home/components/Header/Header'
 import { HeroSectionButton } from '@/modules/home/components/HeroSectionButton/HeroSectionButton'
 import { useRouter } from 'next/router'
+import api from '@/shared/services/api'
 interface IFormInput {
   phone: string
 }
 export function HeroSection() {
-  const [isSelectingCountryCode, selectCoutryCode] = useState(true)
-  const [countryCode, setCountryCode] = useState('BR')
+  const [isSelectingCountryCode, setIsSelectingCountryCode] = useState(true)
+  const [dialCode, setDialCode] = useState(0)
+  const [countryName, setCountryName] = useState('BR')
+  const [isLoading, setLoading] = useState(false)
+  const router = useRouter()
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
+    setError
   } = useForm<IFormInput>({
-    resolver: yupResolver(validatePhone(countryCode)),
+    resolver: yupResolver(validatePhone(countryName)),
     mode: 'all'
   })
 
-  const router = useRouter()
-
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    router.push({
-      pathname: '/register',
-      query: {
-        phone: data.phone
-      }
-    })
+  const handleCheckPhone: SubmitHandler<IFormInput> = async (data) => {
+    try {
+      setLoading(true)
+      await api.get('/users/check-phone', {
+        params: {
+          phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`
+        }
+      })
+      router.push({
+        pathname: '/register',
+        query: {
+          phone: data.phone
+        }
+      })
+    } catch (error: any) {
+      setLoading(false)
+      setError('phone', {
+        message: error.response.data.message
+      })
+    }
   }
 
   return (
@@ -74,7 +90,7 @@ export function HeroSection() {
             />
           </S.InfoCollun>
 
-          <S.WhatsAppForm onSubmit={handleSubmit(onSubmit)}>
+          <S.WhatsAppForm onSubmit={handleSubmit(handleCheckPhone)}>
             <h3>
               Preencha com o seu <br /> WhatsApp e concorra
             </h3>
@@ -100,12 +116,13 @@ export function HeroSection() {
                   }}
                   value={field.value}
                   onChange={(value, data: any, event, formattedValue) => {
-                    setCountryCode(data.countryCode.toUpperCase())
+                    setCountryName(data.countryCode.toUpperCase())
+                    setDialCode(data.dialCode)
                     if (value === data.dialCode) {
                       field.onChange('')
-                      selectCoutryCode(true)
+                      setIsSelectingCountryCode(true)
                     } else {
-                      selectCoutryCode(false)
+                      setIsSelectingCountryCode(false)
                       field.onChange(formattedValue)
                     }
                   }}
@@ -116,7 +133,7 @@ export function HeroSection() {
               )}
             />
 
-            <Button disabled={!isValid}>
+            <Button isLoading={isLoading} disabled={!isValid}>
               <FutureImage
                 className="lock-disabled"
                 src="/icons/lock.svg"
