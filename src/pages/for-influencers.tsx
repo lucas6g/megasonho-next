@@ -1,10 +1,10 @@
-import * as S from '@/modules/be-franchised/styles/BeFranchisedStyles'
+import * as S from '@/modules/for-influencers/styles/ForInfluencers'
 import Image from 'next/image'
 import Footer from '@/shared/components/Footer/Footer'
 import { AboutHeader } from '@/shared/components/AboutHeader/AboutHeader'
 import { NextPage } from 'next'
 
-const BeFranchised: NextPage = () => {
+const ForInfluencers: NextPage = () => {
   return (
     <>
       <AboutHeader />
@@ -12,7 +12,7 @@ const BeFranchised: NextPage = () => {
         <S.Content>
           <S.RegisterSteps>
             <S.SeeHowIsEasyColumn>
-              <h1>Seja franqueado</h1>
+              <h1>Para influencer</h1>
               <p>
                 A MEGASONHO é uma startup com o propósito de <br /> ajudar os
                 brasileiros realizarem o sonho da viagem <br /> para Walt Disney
@@ -47,14 +47,14 @@ const BeFranchised: NextPage = () => {
               <S.BoxOne>
                 <Image
                   className="image-galery-1"
-                  src={'/images/image-galery-13.jpg'}
+                  src={'/images/image-galery-16.jpg'}
                   alt="Disney"
                   width={217}
                   height={231}
                 />
                 <Image
                   className="image-galery-2"
-                  src={'/images/image-galery-14.jpg'}
+                  src={'/images/image-galery-17.jpg'}
                   alt="Disney"
                   width={217}
                   height={231}
@@ -63,7 +63,7 @@ const BeFranchised: NextPage = () => {
               <S.BoxTwo>
                 <Image
                   className="image-galery-3"
-                  src={'/images/image-galery-15.jpg'}
+                  src={'/images/image-galery-18.jpg'}
                   alt="Disney"
                   width={217}
                   height={478}
@@ -78,4 +78,4 @@ const BeFranchised: NextPage = () => {
   )
 }
 
-export default BeFranchised
+export default ForInfluencers

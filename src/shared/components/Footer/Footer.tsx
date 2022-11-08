@@ -71,7 +71,7 @@ export default function Footer() {
             <S.LinksBlockTitle>Saiba mais</S.LinksBlockTitle>
             <FooterLink linkText="Quem Somos" href="/about-us" />
             <FooterLink linkText="Para Empresas" href="/companies" />
-            <FooterLink linkText="Para Influencer" href="/about-us" />
+            <FooterLink linkText="Para Influencer" href="/for-influencers" />
             <FooterLink linkText="Seja Franqueado" href="/be-franchised" />
             <FooterLink linkText="Nossas Políticas" href="/" />
             <FooterLink linkText="Contato" href="/contact" />
