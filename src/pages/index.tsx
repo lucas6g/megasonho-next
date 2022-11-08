@@ -13,7 +13,7 @@ const SectionFour = dynamic(
   }
 )
 const Footer = dynamic(
-  async () => await import('../modules/home/components/Footer/Footer'),
+  async () => await import('../shared/components/Footer/Footer'),
   {
     suspense: true
   }

@@ -7,10 +7,11 @@ import * as S from './HeroSectionStyles'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { validatePhone } from '@/shared/validation/phoneValidationScema'
-import { Header } from '@/modules/home/components/Header/Header'
+
 import { HeroSectionButton } from '@/modules/home/components/HeroSectionButton/HeroSectionButton'
 import { useRouter } from 'next/router'
 import api from '@/shared/services/api'
+import { Header } from '@/modules/home/components/Header/Header'
 interface IFormInput {
   phone: string
 }
