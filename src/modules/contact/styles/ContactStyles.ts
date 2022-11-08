@@ -1,3 +1,4 @@
+import { darken } from 'polished'
 import styled from 'styled-components'
 
 export const Container = styled.section``
@@ -39,7 +40,7 @@ export const SeeHowIsEasyColumn = styled.div`
     color: ${({ theme }) => theme.colors.darkBlue};
     text-align: left;
     opacity: 0.9;
-    margin-bottom: 1.6rem;
+    margin-bottom: 2.8rem;
 
     br {
       display: none;
@@ -67,33 +68,58 @@ export const SeeHowIsEasyColumn = styled.div`
     }
   }
 `
-
-export const BePartYouTooBox = styled.div`
+export const ContactInfoBlock = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1.2rem;
+  flex-direction: column;
+  gap: 8px;
 
-  p {
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    color: ${({ theme }) => theme.colors.black};
-    text-align: left;
-    margin-bottom: 0;
-
-    span {
-      color: ${({ theme }) => theme.colors.blue};
-    }
-  }
-
-  @media (min-width: 425px) {
-    span {
-      br {
-        display: none;
-      }
-    }
+  &.second {
+    margin-top: 20px;
   }
 `
+export const ContactInfoLabel = styled.span`
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: ${({ theme }) => theme.colors.green};
+`
+export const ContactInfo = styled.span`
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: ${({ theme }) => theme.colors.black};
+  opacity: 0.9;
+`
+export const ContactButton = styled.a`
+  border: none;
+  width: 100%;
+  height: 5.2rem;
+  border-radius: 100px;
+  background-color: ${({ theme }) => theme.colors.green};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 40px;
+  transition: background 0.4s;
+  text-decoration: none;
+
+  &:hover {
+    border-bottom: 3px solid ${darken(0.2, '#00A35B')};
+    background-color: ${darken(0.1, '#00A35B')};
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.white};
+    font-size: 1.6rem;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    margin-top: 123px;
+    max-width: 212px;
+  }
+`
+
 export const ImageGalery = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
