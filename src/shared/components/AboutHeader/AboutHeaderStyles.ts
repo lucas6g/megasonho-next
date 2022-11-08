@@ -19,17 +19,10 @@ export const Content = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  .logo-mobile {
+  .logo {
     img {
-      width: 3.2rem;
-      height: 3.2rem;
-    }
-  }
-  .logo-desktop {
-    display: none;
-    img {
-      width: 34.5rem;
-      height: 5rem;
+      width: 17.8rem;
+      height: 2.4rem;
     }
   }
 
@@ -62,11 +55,11 @@ export const Content = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    .logo-desktop {
-      display: block;
-    }
-    .logo-mobile {
-      display: none;
+    .logo {
+      img {
+        width: 34.5rem;
+        height: 5rem;
+      }
     }
 
     div {

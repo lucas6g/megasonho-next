@@ -9,17 +9,9 @@ export function AboutHeader() {
   return (
     <S.Header>
       <S.Content>
-        <Link className="logo-desktop" href="/">
+        <Link className="logo" href="/">
           <FutureImage
             src={'/icons/logo.svg'}
-            alt="Logo da MEGASONHO"
-            width={345}
-            height={50}
-          />
-        </Link>
-        <Link className="logo-mobile" href="/">
-          <FutureImage
-            src={'/icons/white-clover.svg'}
             alt="Logo da MEGASONHO"
             width={345}
             height={50}
