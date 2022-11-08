@@ -4,8 +4,16 @@ import GlobalStyles from '@/shared/styles/global'
 import Head from 'next/head'
 import { theme } from '@/shared/styles/theme'
 import { AuthProvider } from '@/shared/context/AuthContext'
+import { useEffect } from 'react'
+import TagManager from 'react-gtm-module'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const tagManegerArgs = {
+      gtmId: 'GTM-NWZ2NT9'
+    }
+    TagManager.initialize(tagManegerArgs)
+  }, [])
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
