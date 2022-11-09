@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-
-export const Plan = styled.button`
+import Link from 'next/link'
+export const Plan = styled(Link)`
   background-color: ${({ theme }) => theme.colors.gray};
   padding: 8px;
   background: #f4f4f4;
@@ -12,6 +12,7 @@ export const Plan = styled.button`
   align-items: center;
   cursor: pointer;
   align-items: flex-start;
+  text-decoration: none;
 
   div {
     display: flex;
