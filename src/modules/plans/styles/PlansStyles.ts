@@ -1,6 +1,7 @@
 import styled, { keyframes, css } from 'styled-components'
 
 import { pulse } from 'react-animations'
+import Link from 'next/link'
 const pulseAnimation = keyframes`${pulse}`
 
 export const Container = styled.div`
@@ -206,7 +207,7 @@ interface Plan100ButtonProps {
   isOneMinuteLeft: boolean
 }
 
-export const LuckNumberPlan100Button = styled.button<Plan100ButtonProps>`
+export const Plan100Button = styled(Link)<Plan100ButtonProps>`
   width: 100%;
   background: transparent;
   border: none;

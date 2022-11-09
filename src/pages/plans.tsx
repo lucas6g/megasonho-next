@@ -25,10 +25,9 @@ const Plans: NextPage = () => {
   const [coumonPlans, setCoumonPlans] = useState<Plan[]>([])
   const [specialPlan, setSpecialPlan] = useState<Plan>({} as Plan)
   const [isOneMinuteLeft, setIsOneMinuteLeft] = useState(false)
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+
   const wantedDelay = 1000 * 60 * 10 // 10 minutes
   async function handleSelectPlan(planId: string) {
-    setIsButtonDisabled(true)
     await api.post('/plans/purchase', {
       plan_uuid: planId
     })
@@ -232,8 +231,8 @@ const Plans: NextPage = () => {
             />
           </S.TimeBox>
 
-          <S.LuckNumberPlan100Button
-            disabled={isButtonDisabled}
+          <S.Plan100Button
+            href="/payment/1"
             isOneMinuteLeft={isOneMinuteLeft}
             onClick={async () => {
               handleSelectPlan(specialPlan.uuid)
@@ -245,7 +244,7 @@ const Plans: NextPage = () => {
               width={448}
               height={146}
             />
-          </S.LuckNumberPlan100Button>
+          </S.Plan100Button>
 
           <S.NumbersPlansBox>
             {/* {coumonPlans.map((plan) => {
@@ -264,25 +263,25 @@ const Plans: NextPage = () => {
             })} */}
 
             <PlanCard
-              disabled={isButtonDisabled}
+              href="/payment/2"
               numbersQuantity={50}
               price={'R$ 149,90'}
               pricePernumber={'R$ 2,99'}
             />
             <PlanCard
-              disabled={isButtonDisabled}
+              href="/payment/3"
               numbersQuantity={25}
               price={'R$ 99,90'}
               pricePernumber={'R$ 3,99'}
             />
             <PlanCard
-              disabled={isButtonDisabled}
+              href="/payment/4"
               numbersQuantity={10}
               price={'R$ 49,90'}
               pricePernumber={'R$ 4,99'}
             />
             <PlanCard
-              disabled={isButtonDisabled}
+              href="/payment/5"
               numbersQuantity={3}
               price={'R$ 24,90'}
               pricePernumber={'R$ 8,30'}

@@ -1,21 +1,23 @@
-import { ButtonHTMLAttributes } from 'react'
+import { AnchorHTMLAttributes } from 'react'
 
 import * as S from './PlansCardStyles'
 
-interface PlanCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface PlanCardProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   numbersQuantity: number
   price: string
   pricePernumber: string
+  href: string
 }
 
 export function PlanCard({
   numbersQuantity,
   price,
   pricePernumber,
+  href,
   ...rest
 }: PlanCardProps) {
   return (
-    <S.Plan {...rest}>
+    <S.Plan href={href} {...rest}>
       <div>
         <div className="img-back"></div>
         <span className="numbers-quantity">{numbersQuantity} Números</span>
