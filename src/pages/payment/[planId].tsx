@@ -107,7 +107,7 @@ const Payment: NextPage = () => {
 
           <Button
             onClick={() => {
-              router.push('/plans')
+              router.push('/payment-confirmation')
             }}
             className="continue"
           >
