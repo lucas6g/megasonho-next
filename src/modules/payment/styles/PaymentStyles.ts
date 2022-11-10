@@ -63,8 +63,8 @@ export const PaymentContent = styled.div`
     font-size: 16px;
     line-height: 25px;
     color: ${({ theme }) => theme.colors.darkBlue};
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-top: 10px;
+    margin-bottom: 24px;
     opacity: 0.9;
   }
 
@@ -95,6 +95,8 @@ export const PaymentContent = styled.div`
       line-height: 40px;
     }
     p {
+      margin-top: 16px;
+      margin-bottom: 28px;
       font-size: 16px;
       line-height: 25px;
       color: ${({ theme }) => theme.colors.darkBlue};
