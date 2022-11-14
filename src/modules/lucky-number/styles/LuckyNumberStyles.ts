@@ -82,6 +82,10 @@ export const LuckyNumberForm = styled.form`
       color: ${({ theme }) => theme.colors.blue};
     }
   }
+  .lucky-number-box-shimmer {
+    height: 64px;
+    border-radius: 4px;
+  }
 
   @media (min-width: 1024px) {
     height: 100%;
@@ -115,13 +119,6 @@ export const LuckyNumberBox = styled.div`
     font-weight: 700;
     font-size: 28px;
     line-height: 38px;
-    color: ${({ theme }) => theme.colors.darkBlue};
-  }
-
-  span {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 22px;
     color: ${({ theme }) => theme.colors.darkBlue};
   }
 `

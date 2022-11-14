@@ -4,35 +4,49 @@ import { ImageBackground } from '@/shared/components/ImageBackground/ImageBackgr
 import { Button } from '@/shared/components/Button/Button'
 import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
 import useCopy from 'use-copy'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import api from '@/shared/services/api'
 import { NextPage } from 'next'
 import { HeaderPainel } from '@/shared/components/HeaderPainel/HeaderPainel'
 import { useRouter } from 'next/router'
 import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
+import { AuthContext } from '@/shared/context/AuthContext'
+import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
 
 const ShareLink: NextPage = () => {
+  const { user } = useContext(AuthContext)
+
   let baseUrl = ''
+  let codeReference: string | null = ''
   if (typeof window !== 'undefined') {
     baseUrl = window.location.origin
+    codeReference = localStorage.getItem('@MEGASONHO:code_reference')
   }
-  const shareLinkUrl = `${baseUrl}/?r=${''}`
+  const shareLinkUrl = `${baseUrl}/?r=${codeReference as string}`
   const [copied, copy, setCopied] = useCopy(shareLinkUrl)
   const router = useRouter()
 
   useEffect(() => {
+    if (!user) return
+
     async function sendShareLink() {
-      await api.post('/users/send-message/', {
-        message: `*${String(
-          'Viado'
-        )}*, aumente suas chances de concorrer a viagem dos seus sonhos. Compartilhe o seu link de indicação da *MEGASONHO*:`
-      })
-      await api.post('/users/send-message/', {
-        message: shareLinkUrl
-      })
+      await api.post(
+        `/whatsapp/send-message?user_uuid=${user?.uuid as string}`,
+        {
+          message: `*${String(
+            user?.name.split(' ')[0]
+          )}*, aumente suas chances de concorrer a viagem dos seus sonhos. Compartilhe o seu link de indicação da *MEGASONHO*:`
+        }
+      )
+      await api.post(
+        `/whatsapp/send-message?user_uuid=${user?.uuid as string}`,
+        {
+          message: shareLinkUrl
+        }
+      )
     }
     sendShareLink()
-  }, [])
+  }, [user])
 
   function handleCopyToClipBoard() {
     copy()
@@ -54,7 +68,7 @@ const ShareLink: NextPage = () => {
         <HeaderMobile />
 
         <S.ShareLinkContent>
-          <HeaderPainel nameInitialLetter="L" />
+          <HeaderPainel />
           <h1>Aumente as suas chances 😍🎢</h1>
 
           <p>
@@ -63,11 +77,7 @@ const ShareLink: NextPage = () => {
           </p>
 
           <S.LinkBox>
-            <input
-              readOnly
-              type="text"
-              value={'https://www.megasonho.com.br'}
-            />
+            <input readOnly type="text" value={shareLinkUrl} />
 
             <S.CopyButton onClick={handleCopyToClipBoard}>
               {copied ? (
@@ -90,7 +100,7 @@ const ShareLink: NextPage = () => {
 
           <Button
             onClick={() => {
-              router.push('plans')
+              router.push('/plans')
             }}
             className="continue"
           >
@@ -103,3 +113,9 @@ const ShareLink: NextPage = () => {
   )
 }
 export default ShareLink
+
+export const getServerSideProps = requireSSRAuth(async () => {
+  return {
+    props: {}
+  }
+})

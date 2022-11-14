@@ -36,6 +36,17 @@ export const PaymentContent = styled.div`
     margin-bottom: 24px;
   }
 
+  .pix-qr-code-box-shimmer {
+    height: 164px;
+    width: 164px;
+  }
+
+  .pix-key-copy-input-shimmer {
+    min-height: 48px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+  }
+
   background-color: ${({ theme }) => theme.colors.white};
   padding: 16px;
   border-radius: 4px;
@@ -104,7 +115,14 @@ export const PaymentContent = styled.div`
   }
 `
 
-export const PixKeyBox = styled.div`
+export const PixQrCodeBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+`
+
+export const PixKeyCopyInput = styled.div`
   display: flex;
   align-items: center;
   min-height: 48px;
@@ -130,16 +148,8 @@ export const PixKeyBox = styled.div`
 
   span {
     color: ${({ theme }) => theme.colors.blue};
-
     justify-self: center;
   }
-`
-
-export const PixQrCodeBox = styled.div`
-  width: 100;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
 `
 
 export const CopyButton = styled.button`

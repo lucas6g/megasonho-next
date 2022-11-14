@@ -10,6 +10,8 @@ import { HeaderPainel } from '@/shared/components/HeaderPainel/HeaderPainel'
 import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
 import { PromotionTimerDesktop } from '@/modules/plans/components/PromotionTimerDesktop/PromotionTimerDesktop'
 import { PromotionTimerMobile } from '@/modules/plans/components/PromotionTimerMobile/PromotionTimerMobile'
+import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
+import { SkeletonAnimation } from '@/shared/shimmer/SkeletonAnimation'
 
 interface Plan {
   uuid: string
@@ -18,7 +20,7 @@ interface Plan {
   pricePerNumber: string
 }
 const Plans: NextPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isShimmerLoading, setIsShimmerLoading] = useState(true)
   const [coumonPlans, setCoumonPlans] = useState<Plan[]>([])
   const [specialPlan, setSpecialPlan] = useState<Plan>({} as Plan)
   const [isOneMinuteLeft, setIsOneMinuteLeft100Plan] = useState(false)
@@ -31,9 +33,10 @@ const Plans: NextPage = () => {
 
   useEffect(() => {
     api
-      .get<Array<{ uuid: string; quantity: number; price: number }>>('/plans')
+      .get<Array<{ uuid: string; quantity: number; price: number }>>(
+        '/plans/list'
+      )
       .then((response) => {
-        console.log(response.data)
         const plans = response.data.map((plan) => {
           return {
             uuid: plan.uuid,
@@ -56,6 +59,7 @@ const Plans: NextPage = () => {
           setSpecialPlan(specialPlan)
         }
         setCoumonPlans(coumonPlans)
+        setIsShimmerLoading(false)
       })
   }, [])
 
@@ -89,7 +93,7 @@ const Plans: NextPage = () => {
       >
         <HeaderMobile />
         <S.PlansContent>
-          <HeaderPainel nameInitialLetter="L" />
+          <HeaderPainel />
           <h1>Aqui será um título em destaque ⏱</h1>
 
           <p>
@@ -100,62 +104,49 @@ const Plans: NextPage = () => {
           <PromotionTimerMobile
             setIsOneMinute100PlanLeft={setIsOneMinuteLeft100Plan}
           />
-
-          <S.Plan100Button
-            href="/payment/1"
-            isOneMinuteLeft={isOneMinuteLeft}
-            onClick={async () => {
-              handleSelectPlan(specialPlan.uuid)
-            }}
-          >
-            <Image
-              src={'/images/100-numbers-plan.svg'}
-              alt="Imagem de fundo"
-              width={448}
-              height={146}
-            />
-          </S.Plan100Button>
+          {isShimmerLoading ? (
+            <SkeletonAnimation className="plan-button-100-shimmer" />
+          ) : (
+            <S.Plan100Button
+              href={`/payment/${specialPlan.uuid}`}
+              isOneMinuteLeft={isOneMinuteLeft}
+              onClick={async () => {
+                handleSelectPlan(specialPlan.uuid)
+              }}
+            >
+              <Image
+                src={'/images/100-numbers-plan.svg'}
+                alt="Imagem de fundo"
+                width={448}
+                height={146}
+              />
+            </S.Plan100Button>
+          )}
 
           <S.NumbersPlansBox>
-            {/* {coumonPlans.map((plan) => {
-              return (
-                <PlanCard
-                  disabled={isButtonDisabled}
-                  key={plan.uuid}
-                  numbersQuantity={plan.numbersQuantity}
-                  price={plan.price}
-                  pricePernumber={plan.pricePerNumber}
-                  onClick={async () => {
-                    handleSelectPlan(plan.uuid)
-                  }}
-                />
-              )
-            })} */}
-
-            <PlanCard
-              href="/payment/2"
-              numbersQuantity={50}
-              price={'R$ 149,90'}
-              pricePernumber={'R$ 2,99'}
-            />
-            <PlanCard
-              href="/payment/3"
-              numbersQuantity={25}
-              price={'R$ 99,90'}
-              pricePernumber={'R$ 3,99'}
-            />
-            <PlanCard
-              href="/payment/4"
-              numbersQuantity={10}
-              price={'R$ 49,90'}
-              pricePernumber={'R$ 4,99'}
-            />
-            <PlanCard
-              href="/payment/5"
-              numbersQuantity={3}
-              price={'R$ 24,90'}
-              pricePernumber={'R$ 8,30'}
-            />
+            {isShimmerLoading ? (
+              <>
+                <SkeletonAnimation className="plan-card-shimmer" />
+                <SkeletonAnimation className="plan-card-shimmer" />
+                <SkeletonAnimation className="plan-card-shimmer" />
+                <SkeletonAnimation className="plan-card-shimmer" />
+              </>
+            ) : (
+              coumonPlans.map((plan) => {
+                return (
+                  <PlanCard
+                    href={`/payment/${plan.uuid}`}
+                    key={plan.uuid}
+                    numbersQuantity={plan.numbersQuantity}
+                    price={plan.price}
+                    pricePernumber={plan.pricePerNumber}
+                    onClick={async () => {
+                      handleSelectPlan(plan.uuid)
+                    }}
+                  />
+                )
+              })
+            )}
           </S.NumbersPlansBox>
         </S.PlansContent>
         <GradientLine />
@@ -165,3 +156,9 @@ const Plans: NextPage = () => {
 }
 
 export default Plans
+
+export const getServerSideProps = requireSSRAuth(async () => {
+  return {
+    props: {}
+  }
+})

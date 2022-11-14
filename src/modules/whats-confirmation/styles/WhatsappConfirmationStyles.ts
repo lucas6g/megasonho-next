@@ -81,10 +81,11 @@ export const Form = styled.form<FormPros>`
   p {
     text-align: left;
     font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 25px;
+    font-size: 1.8rem;
+    line-height: 22px;
     color: ${({ theme }) => theme.colors.darkBlue};
     margin-top: 1.6rem;
+    opacity: 0.9;
     margin-bottom: 1.6rem;
   }
 
@@ -161,6 +162,11 @@ export const Form = styled.form<FormPros>`
     h1 {
       font-size: 3.2rem;
       line-height: 4rem;
+    }
+
+    p {
+      font-size: 1.8rem;
+      margin-bottom: 28px;
     }
     span {
       white-space: nowrap;

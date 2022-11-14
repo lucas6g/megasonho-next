@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import * as S from './PromotionTimerMobileStyles'
 import Countdown, { zeroPad } from 'react-countdown'
 import Image from 'next/image'
+import Router from 'next/router'
 
 interface PromotionTimerMobileProps {
   setIsOneMinute100PlanLeft: (isOneMinuteLeft: boolean) => void
@@ -17,7 +18,7 @@ export function PromotionTimerMobile({
   const wantedDelay = 1000 * 60 * 10 // 10 minutes
 
   useEffect(() => {
-    const savedDate = localStorage.getItem('end_date')
+    const savedDate = localStorage.getItem('@MEGASONHO:end_date')
     if (savedDate != null && !isNaN(Number(savedDate))) {
       const currentTime = Date.now()
       const delta = parseInt(savedDate, 10) - currentTime
@@ -25,8 +26,8 @@ export function PromotionTimerMobile({
       // Do you reach the end?
       if (delta > wantedDelay) {
         // Yes we clear uour saved end date
-        if (String(localStorage.getItem('end_date')).length > 0)
-          localStorage.removeItem('end_date')
+        if (String(localStorage.getItem('@MEGASONHO:end_date')).length > 0)
+          localStorage.removeItem('@MEGASONHO:end_date')
       } else {
         // No update the end date with the current date
         setData({ date: currentTime, delay: delta })
@@ -51,17 +52,18 @@ export function PromotionTimerMobile({
         date={data.date + data.delay}
         onStart={(delta) => {
           // Save the end date
-          if (localStorage.getItem('end_date') == null) {
+          if (localStorage.getItem('@MEGASONHO:end_date') == null) {
             localStorage.setItem(
-              'end_date',
+              '@MEGASONHO:end_date',
               JSON.stringify(data.date + data.delay)
             )
           }
         }}
         onComplete={() => {
-          if (localStorage.getItem('end_date') != null) {
-            localStorage.removeItem('end_date')
+          if (localStorage.getItem('@MEGASONHO:end_date') != null) {
+            localStorage.removeItem('@MEGASONHO:end_date')
           }
+          Router.push('/dashboard')
         }}
         renderer={({ minutes, seconds }) => {
           if (minutes <= 0) {

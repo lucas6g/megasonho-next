@@ -3,23 +3,20 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import * as yup from 'yup'
 import pt from 'react-phone-input-2/lang/pt.json'
-import * as S from '@/modules/login/styles/LoginStyles'
+import * as S from '@/modules/forgot-password/styles/ForgotPasswordStyles'
 import { PhoneInput } from '@/shared/components/PhoneInput/PhoneInput'
 import { Button } from '@/shared/components/Button/Button'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { Input } from '@/shared/components/Input/Input'
 import 'yup-phone'
 import { useRouter } from 'next/router'
-import { AuthContext } from '@/shared/context/AuthContext'
+
 interface IFormInput {
   phone: string
-  password: string
 }
-const Login: NextPage = () => {
+const ForgotPassword: NextPage = () => {
   const router = useRouter()
-  const { login } = useContext(AuthContext)
   const [dialCode, setDialCode] = useState(0)
   const [isLoading, setLoading] = useState(false)
   const [isSelectingCountryCode, selectCoutryCode] = useState(true)
@@ -28,45 +25,33 @@ const Login: NextPage = () => {
     phone: yup
       .string()
       .phone(countryCode.toUpperCase(), undefined, 'Digite um número correto')
-      .required(),
-    password: yup.string().required('Senha obrigátoria')
+      .required()
   })
 
-  const {
-    control,
-    handleSubmit,
-    register,
-    formState,
-    getFieldState,
-    setError
-  } = useForm<IFormInput>({
-    resolver: yupResolver(formSchema),
-    mode: 'all'
-  })
+  const { control, handleSubmit, formState, getFieldState, setError } =
+    useForm<IFormInput>({
+      resolver: yupResolver(formSchema),
+      mode: 'all'
+    })
 
   const phoneState = getFieldState('phone', formState)
-  const passowordState = getFieldState('password', formState)
 
-  const loginSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const handleForgotPasswordSubmit: SubmitHandler<IFormInput> = async (
+    data
+  ) => {
     try {
+      console.log(`+${dialCode}${data.phone.replace(/\D+/g, '')}`)
       setLoading(true)
-      await login({
-        phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`,
-        password: data.password
-      })
-      router.push('/dashboard')
+
+      router.push('/')
     } catch (error: any) {
+      console.log(error)
       const field = error.response.data.payload.field
-      const message = error.response.data.payload.msg
+      const errorMessage = error.response.data.payload.msg
       switch (field) {
         case 'phone':
           setError('phone', {
-            message
-          })
-          break
-        case 'password':
-          setError('password', {
-            message
+            message: errorMessage
           })
           break
       }
@@ -139,8 +124,9 @@ const Login: NextPage = () => {
               </Link>
             </S.LogoDesktop>
 
-            <S.LoginForm onSubmit={handleSubmit(loginSubmit)}>
-              <S.LoginFormTitle>Faça seu login</S.LoginFormTitle>
+            <S.LoginForm onSubmit={handleSubmit(handleForgotPasswordSubmit)}>
+              <S.LoginFormTitle>Recuperar senha</S.LoginFormTitle>
+              <p>Informe seu número para enviarmos um código de recuperação.</p>
               <div className="gap">
                 <Controller
                   control={control}
@@ -181,26 +167,10 @@ const Login: NextPage = () => {
                     />
                   )}
                 />
-                <Input
-                  register={register}
-                  isCorrect={
-                    !formState.errors.password && passowordState.isDirty
-                  }
-                  name="password"
-                  error={formState.errors.password}
-                  label="Senha:"
-                  type="password"
-                  placeholder="Insira sua senha"
-                  className="input-container"
-                />
+                <Button isLoading={isLoading} type="submit">
+                  <span> Enviar</span>
+                </Button>
               </div>
-
-              <S.ForgotPasswordLink href={'/forgot-password'}>
-                Esqueci minha senha
-              </S.ForgotPasswordLink>
-              <Button isLoading={isLoading} type="submit">
-                <span> Entrar</span>
-              </Button>
             </S.LoginForm>
           </S.SectionForm>
         </S.Content>
@@ -209,4 +179,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default ForgotPassword

@@ -3,13 +3,14 @@ import { setCookie, parseCookies, destroyCookie } from 'nookies'
 import Router from 'next/router'
 import api from '@/shared/services/api'
 
-interface User {
+export interface User {
   uuid: string
   name: string
   phone?: string
   email: string
   access_token: string
   document?: string
+  code_reference: string
   is_active?: boolean
   password?: string
 }
@@ -46,9 +47,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { '@MEGASONHO:user': stringifiedUser } = parseCookies()
 
     if (stringifiedUser) {
-      if (!user) return
       setUser(JSON.parse(stringifiedUser))
-      api.defaults.headers.Authorization = `Bearer ${user.access_token}`
     }
   }, [])
 
@@ -63,19 +62,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
       phone,
       password
     })
-    const { uuid, name, email, access_token } = response.data
+    const { uuid, name, email, access_token, code_reference } = response.data
     setCookie(
       undefined,
       '@MEGASONHO:user',
-      JSON.stringify({ uuid, name, email, access_token }),
+      JSON.stringify({ uuid, name, email, access_token, code_reference }),
       {
-        maxAge: 60 * 60 * 24 * 30, // 30 days
+        maxAge: 60 * 60 * 2, // 2 hoours
         path: '/',
         sameSite: 'Lax'
       }
     )
+
     api.defaults.headers.Authorization = `Bearer ${access_token as string}`
-    setUser({ uuid, name, email, access_token })
+    setUser({ uuid, name, email, access_token, code_reference })
   }
 
   async function registerUser(
@@ -84,10 +84,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const response = await api.post('/users/create', registerUserInput)
 
     setCookie(undefined, '@MEGASONHO:user', JSON.stringify(response.data), {
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: 60 * 10, // 10 minutes
       path: '/',
       sameSite: 'Lax'
     })
+    api.defaults.headers.Authorization = `Bearer ${
+      response.data.access_token as string
+    }`
+    console.log(response.data)
 
     setUser({ ...response.data })
   }

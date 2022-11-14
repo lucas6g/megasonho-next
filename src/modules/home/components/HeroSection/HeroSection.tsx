@@ -43,7 +43,8 @@ export function HeroSection() {
       router.push({
         pathname: '/register',
         query: {
-          phone: data.phone
+          formPhone: data.phone,
+          phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`
         }
       })
     } catch (error: any) {
