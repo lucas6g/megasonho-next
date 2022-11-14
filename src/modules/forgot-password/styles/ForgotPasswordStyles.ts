@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -86,41 +85,31 @@ export const LoginForm = styled.form`
   .gap {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 40px;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+    color: ${({ theme }) => theme.colors.darkBlue};
+    text-align: left;
+    margin-bottom: 24px;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     max-width: 36rem;
+
+    p {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      margin-bottom: 28px;
+    }
   }
 `
-
-export const ForgotPasswordLink = styled(Link)`
-  margin-top: 16px;
-  margin-bottom: 40px;
-  background: transparent;
-  border: none;
-  text-decoration: none;
-  display: inline-block;
-  color: ${({ theme }) => theme.colors.blue};
-  font-size: 1.6rem;
-  align-self: flex-end;
-
-  &::after {
-    content: '';
-    display: block;
-    width: 0px;
-    height: 0.2rem;
-    background: ${({ theme }) => theme.colors.blue};
-    transition: width 0.7s;
-  }
-  &:hover::after {
-    width: 100%;
-  }
-`
-
 export const LoginFormTitle = styled.h1`
   font-weight: 700;
   font-size: 2.4rem;
   color: ${({ theme }) => theme.colors.darkBlue};
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 `

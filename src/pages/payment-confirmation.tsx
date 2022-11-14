@@ -5,6 +5,7 @@ import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
 import { NextPage } from 'next'
 import { HeaderPainel } from '@/shared/components/HeaderPainel/HeaderPainel'
 import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
+import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
 
 const PaymentConfirmation: NextPage = () => {
   return (
@@ -19,7 +20,7 @@ const PaymentConfirmation: NextPage = () => {
         <HeaderMobile />
 
         <S.PaymentConfirmationContent>
-          <HeaderPainel nameInitialLetter="L" />
+          <HeaderPainel />
           <h1>Aqui será um título em destaque ✅</h1>
 
           <p>
@@ -86,3 +87,9 @@ const PaymentConfirmation: NextPage = () => {
   )
 }
 export default PaymentConfirmation
+
+export const getServerSideProps = requireSSRAuth(async () => {
+  return {
+    props: {}
+  }
+})

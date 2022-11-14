@@ -13,11 +13,16 @@ import {
   PlanPaymentDetail,
   plansPaymentsDetails
 } from '@/modules/payment/data/plansPaymentsDetails'
+import api from '@/shared/services/api'
+import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
+import { SkeletonAnimation } from '@/shared/shimmer/SkeletonAnimation'
 
 const Payment: NextPage = () => {
+  const [isShimmerLoading, setIsShimmerLoading] = useState(true)
   const [planPaymentDetails, setPlanPaymentDetails] = useState<
     PlanPaymentDetail | undefined
   >(undefined)
+
   const [copied, copy, setCopied] = useCopy(
     planPaymentDetails?.planPixKey as string
   )
@@ -25,12 +30,20 @@ const Payment: NextPage = () => {
   const { planId } = router.query
 
   useEffect(() => {
-    const planPaymentDetail = plansPaymentsDetails.find(
-      (planPaymentDetails) => {
-        return planPaymentDetails.planId === planId
-      }
-    )
-    setPlanPaymentDetails(planPaymentDetail)
+    api.get('/plans/list').then((response) => {
+      const plan = response.data.find((plan: any) => {
+        return plan.uuid === planId
+      })
+
+      const planPaymentDetail = plansPaymentsDetails.find(
+        (planPaymentDetails) => {
+          return planPaymentDetails.numbersQuantity === plan?.quantity
+        }
+      )
+
+      setPlanPaymentDetails(planPaymentDetail)
+      setIsShimmerLoading(false)
+    })
   }, [planId])
 
   function handleCopyToClipBoard() {
@@ -53,7 +66,7 @@ const Payment: NextPage = () => {
         <HeaderMobile />
 
         <S.PaymentContent>
-          <HeaderPainel nameInitialLetter="L" />
+          <HeaderPainel />
           <h1>
             Aqui será um título em <span>destaque</span>🥳
           </h1>
@@ -63,42 +76,52 @@ const Payment: NextPage = () => {
             sorte para o usuário:
           </p>
 
-          <S.PixQrCodeBox>
-            <Image
-              src={planPaymentDetails?.planQrCodeImgUrl as string}
-              alt="Imagem qr code chave Pix"
-              width={164}
-              height={164}
-            />
-          </S.PixQrCodeBox>
+          {isShimmerLoading ? (
+            <S.PixQrCodeBox>
+              <SkeletonAnimation className="pix-qr-code-box-shimmer" />
+            </S.PixQrCodeBox>
+          ) : (
+            <S.PixQrCodeBox>
+              <Image
+                src={planPaymentDetails?.planQrCodeImgUrl as string}
+                alt="Imagem qr code chave Pix"
+                width={164}
+                height={164}
+              />
+            </S.PixQrCodeBox>
+          )}
 
-          <S.PixKeyBox>
-            <Image
-              src={'/icons/pix-blue.svg'}
-              alt="Icone do Pix"
-              className="pix-image"
-              width={24}
-              height={24}
-            />
-            <input
-              readOnly
-              type="text"
-              value={planPaymentDetails?.planPixKey as string}
-            />
+          {isShimmerLoading ? (
+            <SkeletonAnimation className="pix-key-copy-input-shimmer" />
+          ) : (
+            <S.PixKeyCopyInput>
+              <Image
+                src={'/icons/pix-blue.svg'}
+                alt="Icone do Pix"
+                className="pix-image"
+                width={24}
+                height={24}
+              />
+              <input
+                readOnly
+                type="text"
+                value={planPaymentDetails?.planPixKey as string}
+              />
 
-            <S.CopyButton onClick={handleCopyToClipBoard}>
-              {copied ? (
-                <span>Copiado</span>
-              ) : (
-                <Image
-                  src={'/icons/copy-blue.svg'}
-                  alt="Icone de Copiar Link"
-                  width={24}
-                  height={24}
-                />
-              )}
-            </S.CopyButton>
-          </S.PixKeyBox>
+              <S.CopyButton onClick={handleCopyToClipBoard}>
+                {copied ? (
+                  <span>Copiado</span>
+                ) : (
+                  <Image
+                    src={'/icons/copy-blue.svg'}
+                    alt="Icone de Copiar Link"
+                    width={24}
+                    height={24}
+                  />
+                )}
+              </S.CopyButton>
+            </S.PixKeyCopyInput>
+          )}
 
           <span className="text">
             Aqui será uma descrição para completar alguma informação sobre o
@@ -120,3 +143,9 @@ const Payment: NextPage = () => {
   )
 }
 export default Payment
+
+export const getServerSideProps = requireSSRAuth(async () => {
+  return {
+    props: {}
+  }
+})

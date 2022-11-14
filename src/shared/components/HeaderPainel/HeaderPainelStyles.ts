@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
 export const Container = styled.header`
   display: flex;
@@ -28,7 +29,7 @@ export const InitialLetter = styled.div`
     color: ${({ theme }) => theme.colors.white};
   }
 `
-export const MyPanellButton = styled.button`
+export const MyPanellButton = styled(Link)`
   height: 40px;
   min-width: 133px;
   background: transparent;
@@ -37,7 +38,7 @@ export const MyPanellButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  text-decoration: none;
   font-size: 16px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.darkBlue};

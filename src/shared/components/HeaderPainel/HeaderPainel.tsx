@@ -1,17 +1,17 @@
+import { AuthContext } from '@/shared/context/AuthContext'
+import { useContext } from 'react'
 import { Container, InitialLetter, MyPanellButton } from './HeaderPainelStyles'
 
-interface HeaderPainelProps {
-  nameInitialLetter: string
-}
+export function HeaderPainel() {
+  const { user } = useContext(AuthContext)
 
-export function HeaderPainel({ nameInitialLetter }: HeaderPainelProps) {
   return (
     <Container>
       <div>
         <InitialLetter>
-          <strong>{nameInitialLetter}</strong>
+          <strong>{user?.name[0]}</strong>
         </InitialLetter>
-        <MyPanellButton type="button">Meu painel</MyPanellButton>
+        <MyPanellButton href={'/dashboard'}>Meu painel</MyPanellButton>
       </div>
     </Container>
   )

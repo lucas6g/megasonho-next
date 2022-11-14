@@ -7,55 +7,63 @@ import { useEffect, useState } from 'react'
 import api from '@/shared/services/api'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NextPage } from 'next'
-import { validate } from 'gerador-validador-cpf'
-import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { MaskedInput } from '@/shared/components/MaskedInput/MaskedInput'
 import { useRouter } from 'next/router'
 import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
+import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
+import { documentValidationSchema } from '@/shared/validation/documentValidationScema'
+import { SkeletonAnimation } from '@/shared/shimmer/SkeletonAnimation'
+
 interface FormData {
   document: string
 }
 
 const LuckyNumber: NextPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isShimmerLoading, setIsShimmerLoading] = useState(true)
+  const [buttonLoading, setButtonLoading] = useState(false)
   const [freeLuckyNumber, setFreeLuckyNUmber] = useState('')
   const router = useRouter()
-  async function handleValidateLuckyNumber(values: FormData) {
-    router.push('/share-link')
-  }
 
-  const formSchema = yup.object().shape({
-    document: yup
-      .string()
-      .test('len', 'Digite seu CPF', (inputValue) => {
-        const inputValuelengthWhitOnlyNumbers = inputValue?.replace(
-          /\D+/g,
-          ''
-        ).length
-
-        return inputValuelengthWhitOnlyNumbers === 11
-      })
-      .test('test-invalid-cpf', 'CPF Inválido', (cpf) => {
-        return validate(String(cpf))
-      })
-  })
-
-  const { register, handleSubmit, getFieldState, formState } =
+  const { register, handleSubmit, getFieldState, formState, setError } =
     useForm<FormData>({
-      resolver: yupResolver(formSchema),
+      resolver: yupResolver(documentValidationSchema),
       mode: 'all'
     })
   const documentState = getFieldState('document', formState)
 
+  async function handleValidateLuckyNumber(values: FormData) {
+    try {
+      setButtonLoading(true)
+      const response = await api.patch('/users/update-document', {
+        document: values.document
+      })
+      const { code_reference } = response.data
+      localStorage.setItem('@MEGASONHO:code_reference', code_reference)
+      router.push('/share-link')
+    } catch (error: any) {
+      const field = error.response.data.payload.field
+      const message = error.response.data.payload.msg
+      switch (field) {
+        case 'document':
+          setError('document', {
+            message
+          })
+          break
+      }
+    } finally {
+      setButtonLoading(false)
+    }
+  }
+
   useEffect(() => {
     const handleCreateFreeLuckyNumber = async () => {
       try {
-        const response = await api.post('/number-lucky/create')
+        const response = await api.post('/lucky-numbers/create')
         setFreeLuckyNUmber(response.data.number)
-      } catch (error: any) {
-        const response = await api.get('/number-lucky/my/free-number/')
-        setFreeLuckyNUmber(response.data.number)
+        setIsShimmerLoading(false)
+      } catch (error) {
+        setIsShimmerLoading(false)
       }
     }
 
@@ -82,15 +90,19 @@ const LuckyNumber: NextPage = () => {
             Walt Disney World
           </p>
 
-          <S.LuckyNumberBox>
-            <strong>1.234.567.890</strong>
-            <Image
-              src={'/icons/green-clover.svg'}
-              alt="Icone Trevo verde"
-              width={32}
-              height={32}
-            />
-          </S.LuckyNumberBox>
+          {isShimmerLoading ? (
+            <SkeletonAnimation className="lucky-number-box-shimmer" />
+          ) : (
+            <S.LuckyNumberBox>
+              <strong>{freeLuckyNumber}</strong>
+              <Image
+                src={'/icons/green-clover.svg'}
+                alt="Icone Trevo verde"
+                width={32}
+                height={32}
+              />
+            </S.LuckyNumberBox>
+          )}
 
           <hr />
 
@@ -110,7 +122,11 @@ const LuckyNumber: NextPage = () => {
             placeholder="Insira o seu CPF"
           />
 
-          <Button disabled={!formState.isValid} className="get-more-button">
+          <Button
+            disabled={!formState.isValid}
+            isLoading={buttonLoading}
+            className="get-more-button"
+          >
             <span>Enviar</span>
           </Button>
         </S.LuckyNumberForm>
@@ -121,3 +137,9 @@ const LuckyNumber: NextPage = () => {
 }
 
 export default LuckyNumber
+
+export const getServerSideProps = requireSSRAuth(async () => {
+  return {
+    props: {}
+  }
+})

@@ -32,6 +32,7 @@ const Register: NextPage = () => {
   const [isPhoneInputFiled, setIsPhoneInputFiled] = useState(false)
   const [isSelectingCountryCode, selectCoutryCode] = useState(true)
   const [dialCode, setDialCode] = useState(0)
+  const formPhone = String(router.query.formPhone)
   const phone = String(router.query.phone)
   const {
     register,
@@ -58,22 +59,34 @@ const Register: NextPage = () => {
   )
 
   useEffect(() => {
-    if (phone !== 'undefined') {
+    if (formPhone !== 'undefined') {
       setIsPhoneInputFiled(true)
-      setValue('phone', phone, { shouldDirty: true })
+      setValue('phone', formPhone, { shouldDirty: true })
     }
-  }, [phone])
+  }, [formPhone])
 
   async function handleRegisterParticipant(data: FormData) {
     try {
       setLoading(true)
-      await registerUser({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`
-      })
+
+      if (phone !== 'undefined') {
+        await registerUser({
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          phone
+        })
+      } else {
+        await registerUser({
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`
+        })
+      }
+      router.push('/whatsapp-confirmation')
     } catch (error: any) {
+      console.log(error)
       const field = error.response.data.payload.field
       const message = error.response.data.payload.msg
       switch (field) {
