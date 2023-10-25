@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 import * as S from '@/modules/whats-confirmation/styles/WhatsappConfirmationStyles'
 import api from '@/shared/services/api'
@@ -9,12 +9,14 @@ import { useRouter } from 'next/router'
 import { Button } from '@/shared/components/Button/Button'
 import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
 import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
+import { AuthContext } from '@/shared/context/AuthContext'
 
 const WhatsappConfirmation: NextPage = () => {
   const [token, setToken] = useState('')
   const [code, setCode] = useState('')
   const [isLoading, setLoading] = useState(false)
   const [buttonDisable, setButtonDisabled] = useState(true)
+  const { updateUser } = useContext(AuthContext)
   const router = useRouter()
   const [
     whatsConfirmationCodeErrorMessage,
@@ -27,7 +29,6 @@ const WhatsappConfirmation: NextPage = () => {
         two_factor_type: 'WHATSAPP'
       })
       .then((response) => {
-        console.log(response.data)
         setToken(response.data.token)
       })
   }, [])
@@ -46,6 +47,7 @@ const WhatsappConfirmation: NextPage = () => {
         code,
         token
       })
+      await updateUser()
       router.push('/lucky-number')
     } catch (error: any) {
       setConfirmationCodeError(true)

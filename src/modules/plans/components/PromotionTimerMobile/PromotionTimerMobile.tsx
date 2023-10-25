@@ -63,6 +63,7 @@ export function PromotionTimerMobile({
           if (localStorage.getItem('@MEGASONHO:end_date') != null) {
             localStorage.removeItem('@MEGASONHO:end_date')
           }
+          localStorage.setItem('@MEGASONHO:reach-end_date', String(true))
           Router.push('/dashboard')
         }}
         renderer={({ minutes, seconds }) => {
@@ -82,7 +83,7 @@ export function PromotionTimerMobile({
                   mais número da sorte.
                 </S.OneMinuteLeftMessage>
               )}
-              <S.TimeLeftMessageBox>
+              <S.TimeLeftMessageBox isOneMinuteLeft={isOneMinuteLeft}>
                 <Image
                   src={'/icons/blue-clock.svg'}
                   alt="Icone de um Relogion"

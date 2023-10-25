@@ -5,6 +5,7 @@ import type { NextPage } from 'next'
 import { HeroSection } from '@/modules/home/components/HeroSection/HeroSection'
 import { HowIsEasySection } from '@/modules/home/components/HowIsEasySection/HowIsEasySection'
 import VideoSection from '@/modules/home/components/VideoSection/VideoSection'
+import { useRouter } from 'next/router'
 
 const SectionFour = dynamic(
   async () =>
@@ -21,10 +22,17 @@ const Footer = dynamic(
 )
 
 const Home: NextPage = () => {
+  const router = useRouter()
   const [isRenderVideo, setIsRenderVideo] = useState(false)
+  const code_reference = router.query.r as string
   useEffect(() => {
+    if (code_reference) {
+      localStorage.setItem('@MEGASONHO:r', code_reference)
+    } else {
+      localStorage.removeItem('@MEGASONHO:r')
+    }
     setIsRenderVideo(true)
-  }, [])
+  }, [code_reference])
 
   return (
     <>

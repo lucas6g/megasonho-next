@@ -1,6 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const SkeletonAnimation = styled.div`
+interface SkeletonAnimationProps {
+  isDark?: boolean
+}
+
+export const SkeletonAnimation = styled.div<SkeletonAnimationProps>`
   background-image: linear-gradient(
     -90deg,
     #e7edf1 0%,
@@ -8,7 +12,21 @@ export const SkeletonAnimation = styled.div`
     #e7edf1 100%
   );
   background-size: 400% 400%;
-  animation: shimmer 1.2s ease-in-out infinite;
+  animation: shimmer 0.9s ease-in-out infinite;
+
+  ${props =>
+    props.isDark &&
+    css`
+      background-image: linear-gradient(
+        to right,
+        #3a3a3a 0%,
+        #3f3f3f 10%,
+        #4a4a4a 20%,
+        #3f3f3f 30%,
+        #3a3a3a 50%,
+        #3a3a3a 100%
+      );
+    `}
 
   @keyframes shimmer {
     0% {

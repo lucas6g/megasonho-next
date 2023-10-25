@@ -40,7 +40,9 @@ const Register: NextPage = () => {
     formState,
     getFieldState,
     control,
+    trigger,
     setValue,
+    watch,
     setError
   } = useForm<FormData>({
     resolver: yupResolver(getRegisterPageValidationScemma(countryCode)),
@@ -58,6 +60,8 @@ const Register: NextPage = () => {
     formState
   )
 
+  const watchpass = watch('password')
+
   useEffect(() => {
     if (formPhone !== 'undefined') {
       setIsPhoneInputFiled(true)
@@ -65,28 +69,44 @@ const Register: NextPage = () => {
     }
   }, [formPhone])
 
+  useEffect(() => {
+    if (passwordConfirmationState.isDirty) {
+      trigger('passwordConfirmation')
+    }
+  }, [watchpass])
+
+  useEffect(() => {
+    if (localStorage.getItem('@MEGASONHO:end_date') != null) {
+      localStorage.removeItem('@MEGASONHO:end_date')
+    }
+    if (localStorage.getItem('@MEGASONHO:reach-end_date') != null) {
+      localStorage.removeItem('@MEGASONHO:reach-end_date')
+    }
+  }, [])
+
   async function handleRegisterParticipant(data: FormData) {
     try {
       setLoading(true)
-
+      const codeReference = localStorage.getItem('@MEGASONHO:r')
       if (phone !== 'undefined') {
         await registerUser({
           name: data.name,
           email: data.email,
           password: data.password,
-          phone
+          phone,
+          r: codeReference
         })
       } else {
         await registerUser({
           name: data.name,
           email: data.email,
           password: data.password,
-          phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`
+          phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`,
+          r: codeReference
         })
       }
       router.push('/whatsapp-confirmation')
     } catch (error: any) {
-      console.log(error)
       const field = error.response.data.payload.field
       const message = error.response.data.payload.msg
       switch (field) {
@@ -124,7 +144,12 @@ const Register: NextPage = () => {
               height={50}
               id="logo-white"
             />
-            <button type="button">
+            <button
+              onClick={() => {
+                router.push('/')
+              }}
+              type="button"
+            >
               <Image
                 src={'/icons/close.svg'}
                 alt="Icone de fechar"
@@ -134,7 +159,10 @@ const Register: NextPage = () => {
             </button>
           </S.HeaderMobile>
 
-          <S.Form onSubmit={handleSubmit(handleRegisterParticipant)}>
+          <S.Form
+            autoComplete="off"
+            onSubmit={handleSubmit(handleRegisterParticipant)}
+          >
             <S.HeaderDeskTop>
               <button
                 onClick={() => {
@@ -158,7 +186,7 @@ const Register: NextPage = () => {
               error={formState.errors.name}
               label="Nome Completo:"
               type="text"
-              className="input-container"
+              containerClassName="input-container"
               placeholder="Insira o seu nome completo"
             />
             <Controller
@@ -170,6 +198,7 @@ const Register: NextPage = () => {
                   disableDropdown={isPhoneInputFiled}
                   isCorrect={!formState.errors.phone && phoneState.isDirty}
                   error={formState.errors.phone}
+                  containerClassName="input-container"
                   dropdownClass="input-phone-dropdown"
                   buttonClass="input-phone-button"
                   inputClass="phone-input"
@@ -211,7 +240,8 @@ const Register: NextPage = () => {
               error={formState.errors.email}
               label="E-mail:"
               type="email"
-              className="input-container"
+              autoComplete="off"
+              containerClassName="input-container"
               placeholder="Insira o seu melhor email"
             />
             <Input
@@ -221,8 +251,9 @@ const Register: NextPage = () => {
               error={formState.errors.password}
               label="Senha:"
               type="password"
+              autoComplete="new-password"
               placeholder="Crie a sua senha"
-              className="input-container"
+              containerClassName="input-container"
             />
             <Input
               register={register}
@@ -234,7 +265,8 @@ const Register: NextPage = () => {
               error={formState.errors.passwordConfirmation}
               label="Confirmar senha:"
               type="password"
-              className="input-container"
+              autoComplete="new-password"
+              containerClassName="input-container"
               placeholder="Confirme a sua senha"
             />
 

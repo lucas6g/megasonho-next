@@ -13,6 +13,13 @@ export const Container = styled.div`
   }
 `
 
+export const LoadingContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const ImageBackground = styled.div`
   display: none;
 
@@ -41,15 +48,24 @@ export const PlansContainer = styled.div`
   position: relative;
   background-position: 90%;
   background-size: cover;
-
   padding-bottom: 32px;
   display: flex;
   flex-direction: column;
   overflow: auto;
 
+  .gradient-line {
+    display: none;
+  }
+
+  @media (min-height: 800px) {
+    .gradient-line {
+      display: block;
+    }
+  }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     background-image: unset !important;
     height: 100vh;
+    padding-bottom: 20px;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
     padding: 0;
@@ -116,7 +132,11 @@ export const PlansContent = styled.div`
     margin-top: 24px;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    max-width: 448px;
+    padding: 0;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
     max-width: 448px;
     padding: 0;
     padding-top: 4.8rem;

@@ -12,6 +12,10 @@ import { PromotionTimerDesktop } from '@/modules/plans/components/PromotionTimer
 import { PromotionTimerMobile } from '@/modules/plans/components/PromotionTimerMobile/PromotionTimerMobile'
 import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
 import { SkeletonAnimation } from '@/shared/shimmer/SkeletonAnimation'
+import Router from 'next/router'
+import swal from '@sweetalert/with-react'
+import Lottie from 'react-lottie'
+import * as animationData from '@/shared/animations/floating-mickey-head.json'
 
 interface Plan {
   uuid: string
@@ -20,16 +24,65 @@ interface Plan {
   pricePerNumber: string
 }
 const Plans: NextPage = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
   const [isShimmerLoading, setIsShimmerLoading] = useState(true)
   const [coumonPlans, setCoumonPlans] = useState<Plan[]>([])
   const [specialPlan, setSpecialPlan] = useState<Plan>({} as Plan)
   const [isOneMinuteLeft, setIsOneMinuteLeft100Plan] = useState(false)
+
+  const [isTimerEnds, setIsTimerEnds] = useState(false)
+  const [hasOffer, setHasOffer] = useState(false)
 
   async function handleSelectPlan(planId: string) {
     await api.post('/plans/purchase', {
       plan_uuid: planId
     })
   }
+
+  function showAlert() {
+    swal('Sua Oferta Especial expirou!', 'Aguarde a Proxima.', {
+      icon: 'error',
+      button: {
+        text: 'Entendi'
+      }
+    })
+  }
+
+  function verifyTimerEnds() {
+    if (localStorage.getItem('@MEGASONHO:reach-end_date') != null) {
+      setIsTimerEnds(true)
+      return true
+    }
+    return false
+  }
+
+  async function getOffer(): Promise<boolean> {
+    try {
+      await api.get('/offers/list')
+      setHasOffer(true)
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  useEffect(() => {
+    getOffer().then((response) => {
+      const canSeeOffer = response
+      const reachEndDate = verifyTimerEnds()
+      if (!canSeeOffer || reachEndDate) {
+        showAlert()
+        Router.push('/dashboard')
+      }
+    })
+  }, [])
 
   useEffect(() => {
     api
@@ -62,6 +115,14 @@ const Plans: NextPage = () => {
         setIsShimmerLoading(false)
       })
   }, [])
+
+  if (!hasOffer || isTimerEnds) {
+    return (
+      <S.LoadingContainer>
+        <Lottie options={defaultOptions} height={120} width={120} />
+      </S.LoadingContainer>
+    )
+  }
 
   return (
     <S.Container>
@@ -149,7 +210,7 @@ const Plans: NextPage = () => {
             )}
           </S.NumbersPlansBox>
         </S.PlansContent>
-        <GradientLine />
+        <GradientLine className="gradient-line" />
       </S.PlansContainer>
     </S.Container>
   )

@@ -1,10 +1,13 @@
 import { HeroSectionButton } from '@/modules/home/components/HeroSectionButton/HeroSectionButton'
+import { AuthContext } from '@/shared/context/AuthContext'
 import FutureImage from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import * as S from './HeaderStyles'
 export function Header() {
   const router = useRouter()
+  const { user } = useContext(AuthContext)
 
   return (
     <S.Header>
@@ -44,9 +47,9 @@ export function Header() {
         </a>
         <HeroSectionButton
           onClick={() => {
-            router.push('/login')
+            router.push(user ? '/dashboard' : '/login')
           }}
-          text="Login"
+          text={user ? 'Painel' : 'Login'}
         />
       </div>
     </S.Header>

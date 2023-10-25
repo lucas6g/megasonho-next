@@ -1,5 +1,9 @@
 import * as S from './GrandientLineStyles'
 
-export function GradientLine() {
-  return <S.GradientLine />
+interface GradientLineProps {
+  className?: string
+}
+
+export function GradientLine({ className }: GradientLineProps) {
+  return <S.GradientLine className={className} />
 }

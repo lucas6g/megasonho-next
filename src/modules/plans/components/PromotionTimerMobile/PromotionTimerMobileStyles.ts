@@ -37,7 +37,10 @@ export const LimitedOfferBox = styled.div`
     color: ${({ theme }) => theme.colors.white};
   }
 `
-export const TimeLeftMessageBox = styled.div`
+interface TimeLeftMessageBoxProps {
+  isOneMinuteLeft: boolean
+}
+export const TimeLeftMessageBox = styled.div<TimeLeftMessageBoxProps>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -48,6 +51,11 @@ export const TimeLeftMessageBox = styled.div`
     font-size: 12px;
     line-height: 15px;
     color: ${({ theme }) => theme.colors.darkBlue};
+    ${props =>
+      props.isOneMinuteLeft &&
+      css`
+        color: ${({ theme }) => theme.colors.red};
+      `};
   }
 `
 

@@ -21,7 +21,34 @@ export function getRegisterPageValidationScemma (countryCode: string) {
       .string()
       .required('E-mail obrigatório')
       .email('Digite um e-mail válido'),
-    password: yup.string().required('Senha obrigátoria'),
+    password: yup
+      .string()
+      .required('Senha obrigátoria')
+      .test(
+        'letra-maiuscula',
+        'Tá faltando a letra maiuscula',
+        (inputValue: any) => {
+          const hasUperAtLeastOneUpperLetter = inputValue?.match(/(.*[A-Z].*)/)
+
+          return hasUperAtLeastOneUpperLetter
+        }
+      )
+      .test(
+        'has-spetial-charactere',
+        'Tá faltando um caractere especial',
+        (inputValue: any) => {
+          const hasSpecialCaractere = inputValue?.match(
+            /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/
+          )
+
+          return hasSpecialCaractere
+        }
+      )
+      .test('contains-number', 'Tá faltando um numero', (inputValue: any) => {
+        const hasNumber = inputValue?.match(/[0-9]/)
+
+        return hasNumber
+      }),
 
     passwordConfirmation: yup
       .string()

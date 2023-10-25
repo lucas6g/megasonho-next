@@ -9,6 +9,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: FieldError
   register: any
   isCorrect?: boolean
+  containerClassName?: string
+  hasButtonToComplete?: boolean
+  completeEmail?: (emailEnd: string) => void
 }
 
 export function Input({
@@ -17,14 +20,18 @@ export function Input({
   register,
   name,
   isCorrect = false,
-
+  containerClassName,
+  hasButtonToComplete = false,
+  completeEmail,
   ...rest
 }: InputProps) {
+  const completeEmailButtons = ['@hotmail.com', '@gmail.com', '@outlook.com']
+
   return (
-    <Container>
+    <Container className={containerClassName}>
       <InputBlock isCorrect={isCorrect} isError={!!error}>
         {!!label && <label htmlFor={name}>{label}</label>}
-        <div>
+        <div className="icons">
           <StyledInput
             isError={!!error}
             id={name}
@@ -49,6 +56,21 @@ export function Input({
           )}
         </div>
       </InputBlock>
+      {hasButtonToComplete && (
+        <div className="complete-email-buttons">
+          {completeEmailButtons.map((value) => {
+            return (
+              <button
+                onClick={() => completeEmail?.(value)}
+                type="button"
+                key={value}
+              >
+                {value}
+              </button>
+            )
+          })}
+        </div>
+      )}
       {!!error && <span className="error-message">{error.message}</span>}
     </Container>
   )

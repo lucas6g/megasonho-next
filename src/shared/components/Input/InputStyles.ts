@@ -9,6 +9,38 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.colors.red};
     margin-top: 4px;
   }
+
+  .complete-email-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 339px;
+    margin-top: 12px;
+
+    button {
+      width: 100%;
+      max-width: 110px;
+      height: 29px;
+      border-radius: 4px;
+      background-color: #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 400;
+      font-size: 12px;
+      color: ${({ theme }) => theme.colors.darkBlue};
+      border: none;
+      padding: 6px;
+    }
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    .complete-email-buttons {
+      gap: 12px;
+      button {
+        font-size: 14px;
+      }
+    }
+  }
 `
 
 interface InputBlockProps {
@@ -34,7 +66,7 @@ export const InputBlock = styled.div<InputBlockProps>`
       border-color: ${({ theme }) => theme.colors.red};
     `}
 
-  div {
+  .icons {
     position: relative;
     img {
       position: absolute;

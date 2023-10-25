@@ -56,6 +56,7 @@ export function PromotionTimerDesktop() {
           if (localStorage.getItem('@MEGASONHO:end_date') != null) {
             localStorage.removeItem('@MEGASONHO:end_date')
           }
+          localStorage.setItem('@MEGASONHO:reach-end_date', String(true))
           Router.push('/dashboard')
         }}
         renderer={({ minutes, seconds }) => {
@@ -68,15 +69,17 @@ export function PromotionTimerDesktop() {
               <span className={minutes <= 0 ? 'one-minute' : 'timer'}>
                 {zeroPad(minutes)}:{zeroPad(seconds)}
               </span>
-              <S.TimeLeftMessageBoxDesktop>
+              <S.TimeLeftMessageBoxDesktop isOneMinuteLeft={isOneMinuteLeft}>
                 <Image
                   src={'/icons/blue-clock.svg'}
-                  alt="Icone de um Relogion"
+                  alt="Icone de um Relogio"
                   width={16}
                   height={16}
                 />
 
-                <span>Resta somente {minutes} minutos, aproveite</span>
+                <span className={''}>
+                  Resta somente {minutes} minutos, aproveite
+                </span>
               </S.TimeLeftMessageBoxDesktop>
             </S.TimerDesktop>
           )

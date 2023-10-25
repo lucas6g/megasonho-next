@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import 'yup-phone'
 import { useRouter } from 'next/router'
+import api from '@/shared/services/api'
 
 interface IFormInput {
   phone: string
@@ -40,14 +41,16 @@ const ForgotPassword: NextPage = () => {
     data
   ) => {
     try {
-      console.log(`+${dialCode}${data.phone.replace(/\D+/g, '')}`)
       setLoading(true)
 
-      router.push('/')
+      await api.post('/users/forgot-password', {
+        phone: `+${dialCode}${data.phone.replace(/\D+/g, '')}`
+      })
+
+      router.push('/login')
     } catch (error: any) {
-      console.log(error)
-      const field = error.response.data.payload.field
-      const errorMessage = error.response.data.payload.msg
+      const field = error.response.data.field
+      const errorMessage = error.response.data.msg
       switch (field) {
         case 'phone':
           setError('phone', {
@@ -126,7 +129,7 @@ const ForgotPassword: NextPage = () => {
 
             <S.LoginForm onSubmit={handleSubmit(handleForgotPasswordSubmit)}>
               <S.LoginFormTitle>Recuperar senha</S.LoginFormTitle>
-              <p>Informe seu número para enviarmos um código de recuperação.</p>
+              <p>Informe seu número para enviarmos uma senha temporaria.</p>
               <div className="gap">
                 <Controller
                   control={control}

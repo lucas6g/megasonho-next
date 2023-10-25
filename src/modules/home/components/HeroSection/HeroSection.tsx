@@ -7,7 +7,6 @@ import * as S from './HeroSectionStyles'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { validatePhone } from '@/shared/validation/phoneValidationScema'
-
 import { HeroSectionButton } from '@/modules/home/components/HeroSectionButton/HeroSectionButton'
 import { useRouter } from 'next/router'
 import api from '@/shared/services/api'

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const TimeBoxDesktop = styled.div`
   width: 100%;
@@ -33,7 +33,11 @@ export const LimitedOfferBoxDesktop = styled.div`
     color: ${({ theme }) => theme.colors.white};
   }
 `
-export const TimeLeftMessageBoxDesktop = styled.div`
+interface TimeLeftMessageBoxProps {
+  isOneMinuteLeft: boolean
+}
+
+export const TimeLeftMessageBoxDesktop = styled.div<TimeLeftMessageBoxProps>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -47,7 +51,13 @@ export const TimeLeftMessageBoxDesktop = styled.div`
     font-size: 16px;
     line-height: 15px;
     color: ${({ theme }) => theme.colors.darkBlue};
+    ${props =>
+      props.isOneMinuteLeft &&
+      css`
+        color: ${({ theme }) => theme.colors.red};
+      `};
   }
+
   img {
     height: 20px;
     width: 20px;

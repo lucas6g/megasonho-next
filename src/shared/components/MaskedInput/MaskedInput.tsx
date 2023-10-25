@@ -10,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register: any
   isCorrect?: boolean
   mask: string
+  containerClassName?: string
 }
 
 export function MaskedInput({
@@ -17,12 +18,13 @@ export function MaskedInput({
   error,
   register,
   mask,
+  containerClassName,
   name,
   isCorrect = false,
   ...rest
 }: InputProps) {
   return (
-    <Container>
+    <Container className={containerClassName}>
       <InputBlock isCorrect={isCorrect} isError={!!error}>
         {!!label && <label htmlFor={name}>{label}</label>}
         <div>

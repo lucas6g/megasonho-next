@@ -7,16 +7,19 @@ interface PhoneInputProps extends ReactPhoneInputProps {
   label?: string
   error?: FieldError
   isCorrect?: boolean
+  containerClassName?: string
 }
 
 export function PhoneInput({
   label,
   error,
   isCorrect = false,
+  containerClassName,
+
   ...rest
 }: PhoneInputProps) {
   return (
-    <Container>
+    <Container className={containerClassName}>
       <InputBlock isError={!!error}>
         {!!label && <label htmlFor={'phone'}>{label}</label>}
         <div>

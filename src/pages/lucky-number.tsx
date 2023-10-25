@@ -3,17 +3,18 @@ import * as S from '@/modules/lucky-number/styles/LuckyNumberStyles'
 import { Button } from '@/shared/components/Button/Button'
 import { ImageBackground } from '@/shared/components/ImageBackground/ImageBackground'
 import { GradientLine } from '@/shared/components/GradientLine/GradientLine'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import api from '@/shared/services/api'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { NextPage } from 'next'
 import { useForm } from 'react-hook-form'
+import { NextPage } from 'next'
 import { MaskedInput } from '@/shared/components/MaskedInput/MaskedInput'
 import { useRouter } from 'next/router'
 import { HeaderMobile } from '@/shared/components/HeaderMobile/HeaderMobile'
 import { requireSSRAuth } from '@/shared/utils/requireSSRAuth'
 import { documentValidationSchema } from '@/shared/validation/documentValidationScema'
 import { SkeletonAnimation } from '@/shared/shimmer/SkeletonAnimation'
+import { AuthContext } from '@/shared/context/AuthContext'
 
 interface FormData {
   document: string
@@ -23,6 +24,7 @@ const LuckyNumber: NextPage = () => {
   const [isShimmerLoading, setIsShimmerLoading] = useState(true)
   const [buttonLoading, setButtonLoading] = useState(false)
   const [freeLuckyNumber, setFreeLuckyNUmber] = useState('')
+  const { updateUser } = useContext(AuthContext)
   const router = useRouter()
 
   const { register, handleSubmit, getFieldState, formState, setError } =
@@ -35,11 +37,11 @@ const LuckyNumber: NextPage = () => {
   async function handleValidateLuckyNumber(values: FormData) {
     try {
       setButtonLoading(true)
-      const response = await api.patch('/users/update-document', {
+      await api.patch('/users/update-document', {
         document: values.document
       })
-      const { code_reference } = response.data
-      localStorage.setItem('@MEGASONHO:code_reference', code_reference)
+
+      await updateUser()
       router.push('/share-link')
     } catch (error: any) {
       const field = error.response.data.payload.field

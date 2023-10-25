@@ -1,3 +1,4 @@
+
 import { Container } from './VideoSectionStyles'
 import FutureImage from 'next/image'
 import { useEffect, useRef } from 'react'
@@ -89,3 +90,4 @@ export default function VideoSection() {
     </Container>
   )
 }
+

@@ -15,16 +15,18 @@ export const FormContainer = styled.div`
   position: relative;
   background-position: 90%;
   background-size: cover;
-  height: 100%;
-  overflow: auto;
   padding-bottom: 16px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    overflow: auto;
     padding-bottom: 0;
+    overflow: auto;
+  }
+  @media (min-height: 700px) {
+    height: 100%;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     background-image: unset !important;
+    padding-top: 24px;
     height: 100vh;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
@@ -32,13 +34,14 @@ export const FormContainer = styled.div`
     padding-left: 9.6rem;
   }
 `
-export const HeaderDeskTop = styled.div`
+export const HeaderDeskTop = styled.header`
   display: none;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
     justify-content: flex-end;
     height: 4rem;
+    margin-bottom: 24px;
 
     button {
       border: none;
@@ -54,7 +57,7 @@ export const HeaderDeskTop = styled.div`
   }
 `
 
-export const HeaderMobile = styled.div`
+export const HeaderMobile = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,19 +88,27 @@ export const Form = styled.form`
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  gap: 32px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding: 0;
-    padding-top: 4.8rem;
+    gap: 0;
+
     max-width: 44.8rem;
     height: 100%;
-    gap: 4rem;
+
+    .input-container + .input-container {
+      margin-top: 32px;
+    }
 
     .register-btn {
       margin-top: auto;
       margin-bottom: 46px;
+      min-height: 48px;
     }
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    padding-top: 4.8rem;
   }
 `
 
@@ -131,7 +142,8 @@ export const TermsCheckBox = styled.div`
     }
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-top: 8px;
+    margin-top: 32px;
+    margin-bottom: 16px;
   }
 `
 

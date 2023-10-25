@@ -6,7 +6,21 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  margin-bottom: 4.8rem;
+  margin-bottom: 16px;
+
+  div {
+    .avatar {
+      height: 40px;
+      width: 40px;
+      strong {
+        font-size: 20px;
+      }
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.xg}) {
+    margin-bottom: 4.8rem;
+  }
 
   div {
     display: flex;
@@ -14,21 +28,7 @@ export const Container = styled.header`
     gap: 12px;
   }
 `
-export const InitialLetter = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #1d33a7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  strong {
-    font-size: 20px;
-    font-weight: 700;
-    color: ${({ theme }) => theme.colors.white};
-  }
-`
 export const MyPanellButton = styled(Link)`
   height: 40px;
   min-width: 133px;
